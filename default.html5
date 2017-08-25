@@ -42,9 +42,12 @@ $for(header-includes)$
 $endfor$
 </head>
 <body>
+<div class="outer_container">
+<div class="mid_container">
 $for(include-before)$
 $include-before$
 $endfor$
+<div class="inner_container">
 $if(title)$
 <header>
 <h1 class="title">$title$</h1>
@@ -64,9 +67,14 @@ $if(toc)$
 $table-of-contents$
 </nav>
 $endif$
+<div class="contents">
 $body$
+</div>
+</div>
 $for(include-after)$
 $include-after$
 $endfor$
+</div>
+</div>
 </body>
 </html>
