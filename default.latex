@@ -127,6 +127,8 @@ $if(colorlinks)$
 $endif$
 \usepackage{hyperref}
 \hypersetup{
+            bookmarks=true,
+            bookmarksopen=true,
 $if(title-meta)$
             pdftitle={$title-meta$},
 $endif$
@@ -304,6 +306,7 @@ $if(natbib)$
 $endif$
 $if(biblatex)$
 \usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+\DeclareRedundantLanguages{english,german,french,dutch}{english,german,ngerman,french,dutch,afrikaans}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
