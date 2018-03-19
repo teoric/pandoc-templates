@@ -306,7 +306,7 @@ $if(natbib)$
 $endif$
 $if(biblatex)$
 \usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
-\DeclareRedundantLanguages{english,german,french,dutch}{english,german,ngerman,french,dutch,afrikaans}
+\DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
