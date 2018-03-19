@@ -17,12 +17,18 @@ $highlighting-macros$
 $endif$
 .\" **** Settings *************************************************
 .\" text width
-.nr LL 5.5i
+.nr LL 16cm
 .\" left margin
-.nr PO 1.25i
+.nr PO 2.5cm
 .\" top margin
-.nr HM 1.25i
+.nr HM 2.5cm
 .\" bottom margin
+.\".nr LL 5.5i
+.\".\" left margin
+.\".nr PO 1.25i
+.\".\" top margin
+.\".nr HM 1.25i
+.\".\" bottom margin
 .nr FM 1.25i
 .\" header/footer width
 .nr LT \n[LL]
