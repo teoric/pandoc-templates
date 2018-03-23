@@ -33,12 +33,15 @@ $endif$
 .nr FM 3cm
 .\" header/footer width
 .nr LT \n[LL]u
+.\" relative lineheight
+.nr linescale $if(linescale)$$linescale$$else$1175$endif$
 .\" point size
 .nr PS $if(pointsize)$$pointsize$$else$10p$endif$
 .\" line height
-.nr VS $if(lineheight)$$lineheight$$else$\n(PS*1225/1000u$endif$
+.nr VS $if(lineheight)$$lineheight$$else$\n(PS*\n[linescale]/1000u$endif$
 .\" font family: A, BM, H, HN, N, P, T, ZCM
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
+.lg 0
 .\" paragraph indent
 .nr PI $if(indent)$$indent$$else$2m$endif$
 .\" interparagraph space
@@ -46,7 +49,11 @@ $endif$
 .\" footnote width
 .nr FL \n[LL]u
 .\" footnote point size
-.nr FPS (\n[PS]u - 2p)
+.if t\{\
+.  nr FPS \n(PS*800/1000u
+.  nr FVS \n(PS*\n[linescale]/1000*800/1000u
+.\}
+.if n .nr FPS \n[PS]u
 $if(papersize)$
 .\" paper size
 .ds paper $papersize$
