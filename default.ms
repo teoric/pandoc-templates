@@ -16,12 +16,13 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 .\" **** Settings *************************************************
-.\" text width
-.nr LL 16cm
 .\" left margin
 .nr PO 2.5cm
+.\" text width
+.nr LL 21cm
+.nr LL -2*\n[PO]u
 .\" top margin
-.nr HM 2.5cm
+.nr HM 2.0cm
 .\" bottom margin
 .\".nr LL 5.5i
 .\".\" left margin
@@ -29,23 +30,23 @@ $endif$
 .\".\" top margin
 .\".nr HM 1.25i
 .\".\" bottom margin
-.nr FM 1.25i
+.nr FM 3cm
 .\" header/footer width
-.nr LT \n[LL]
+.nr LT \n[LL]u
 .\" point size
 .nr PS $if(pointsize)$$pointsize$$else$10p$endif$
 .\" line height
-.nr VS $if(lineheight)$$lineheight$$else$12p$endif$
+.nr VS $if(lineheight)$$lineheight$$else$\n(PS*1225/1000u$endif$
 .\" font family: A, BM, H, HN, N, P, T, ZCM
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
 .\" paragraph indent
 .nr PI $if(indent)$$indent$$else$2m$endif$
 .\" interparagraph space
-.nr PD 0.33v
+.\"nr PD 0.33v
 .\" footnote width
-.nr FL \n[LL]
+.nr FL \n[LL]u
 .\" footnote point size
-.nr FPS (\n[PS] - 2000)
+.nr FPS (\n[PS]u - 2p)
 $if(papersize)$
 .\" paper size
 .ds paper $papersize$
@@ -75,7 +76,11 @@ $if(adjusting)$
 .ad $adjusting$
 $endif$
 $if(hyphenate)$
+.nr german-new-hyphenation-patterns 1
 .hy
+$if(lang)$
+.mso $lang$.tmac
+$endif$
 $else$
 .nh \" Turn off hyphenation by default.
 $endif$
