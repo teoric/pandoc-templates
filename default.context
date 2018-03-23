@@ -1,6 +1,7 @@
 $if(context-lang)$
 \mainlanguage[$context-lang$]
 $endif$
+\setuplayout[grid=yes]
 $if(context-dir)$
 \setupalign[$context-dir$]
 \setupdirections[bidi=on,method=two]
@@ -111,7 +112,8 @@ $endfor$
 \starttext
 $if(title)$
 \startalignment[middle]
-  {\tfd $title$}
+  \blank[2*big]
+  {\tfd\setupinterlinespace $title$\endgraf}
 $if(subtitle)$
   \smallskip
   {\tfa $subtitle$}
