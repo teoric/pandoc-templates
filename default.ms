@@ -28,74 +28,9 @@ $endif$
 $else$
 .nh \" Turn off hyphenation by default.
 $endif$
-.\" **** PICs *****************************************************
-.nr IMAGE 0 1 \" register for image number, autoincrement
-.nr TABLE 0 1 \" register for image number, autoincrement
-.de ANYPIC  \" macro to be replaced by user with PSPIC or PDFPIC
-.  nr PICWIDTH \\$$4
-.  nr PICWIDTH_O \\$$4
-.  nr PICHEIGHT \\$$5
-.  nr PICHEIGHT_O \\$$5
-.  nr PICWIDTH (\\n[PICWIDTH] <? (\\n(LL) * 98 / 100))
-.  nr PICHEIGHT (\\n[PICHEIGHT] <? (\\n(.p) * 98 / 100))
-.  nr REL_HEIGHT (\\n[PICHEIGHT] * 1000 / \\n[PICHEIGHT_O])
-.  nr REL_WIDTH (\\n[PICWIDTH] * 1000 / \\n[PICWIDTH_O])
-.\"  br
-.  nr FILLED_BEFORE \\n[.u]
-.  ie \\n[FILLED_BEFORE] .ds ORIENT -L
-.  el ds ORIENT -C
-.  nf
-\\h'\\n[PICWIDTH]u'
-.  ie (\\n[REL_HEIGHT] < \\n[REL_WIDTH]) \{\
-.  \" from groff_tmac(7)
-.  vpt 0
-.  sp -1
-.  vpt 1
-.    tm scaling for height
-.    nr PICWIDTH (\\n[REL_HEIGHT] * \\n[PICWIDTH_O] / 1000)
-.  \}
-.  el \{\
-.    tm scaling for width
-.    nr PICHEIGHT (\\n[REL_WIDTH] * \\n[PICHEIGHT_O] / 1000)
-.  \}
-.  tm FILE \\$$3 \\$$4 \\$$5 \" NAME [WIDTH [HEIGHT]]
-.  tm FILE \\$$3 \\n[PICWIDTH] \\n[PICHEIGHT] \\n[PICHEIGHT_O]
-.  ie !'\\$$2'' \{\
-.    ie '\\$$1'F' .KF \" start keep - floating with KF
-.    el .KS \" start keep - non-floating with KS
-.    PDFPIC \\*[ORIENT] \\$$3 \\n[PICWIDTH]u \\n[PICHEIGHT]u
-.\}
-.  el \{
-.    PDFPIC \\*[ORIENT] \\$$3 \\n[PICWIDTH]u \\n[PICHEIGHT]u
-.\}
-.\"  nr IMAGE +1
-.  ie !'\\$$2'' \{\
-.if \\n[FILLED_BEFORE] .fi
-.QP
-.if '\\*[.T]'pdf' .sp \\n[PICHEIGHT]u
-\*[Lifg] \\n+[IMAGE]. \\$$2
-.\}
-.el .if '\\*[.T]'pdf' .sp \\n[PICHEIGHT]u
-.  if '\\$$1'F' .sp 1.5
-.  if !'\\$$2'' \{\
-.    KE \" end keep
-\}
-..
-.\" **** TABLES *****************************************************
-.de TABLESTART
-.KS
-..
-.de TABLELABLE
-.sp
-.nr TABLE_LABELLED 1
-.QP
-\*[Litb] \\n+[TABLE]. \\fI\\$$1\\fP
-..
-.de TABLEEND
-.\}
-.sp 1.5v
-.KE
-..
+.nr FROM_PANDOC 1
+.nr SCALE_TO_LL 1 \" avoid image hanging over
+.mso anypic.tmac
 .\" **** Settings *************************************************
 .\" left margin
 .nr PO 2.5cm
@@ -130,7 +65,7 @@ $endif$
 .\" footnote width
 .nr FL \n[LL]u
 .\" footnote point size
-.if t\{\
+.if t \{
 .  nr FPS \n(PS*8/10u
 .  nr FVS \n(PS*\n[linescale]*8/10/1000u
 .\}
