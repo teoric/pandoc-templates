@@ -20,26 +20,29 @@ $if(hyphenate)$
 .nr german-new-hyphenation-patterns 1
 .hy
 $if(lang)$
+.\" use lang.tmac for language settings (currently only for en, de, fr)
 .mso $lang$.tmac
-.ds PH "NIX"
-.mso trans.tmac
+.ds PH "NIX" \" to allow trans.tmac to function
+.mso trans.tmac \" apply translations from lang.tmac
 .\" tm $lang$ \*[\*[locale]-lifg] \*[Lifg]
 $endif$
 $else$
 .nh \" Turn off hyphenation by default.
 $endif$
-.nr FROM_PANDOC 1
-.nr SCALE_TO_LL 1 \" avoid image hanging over
-.mso anypic.tmac
+.nr FROM_PANDOC 1          \" used to controll image placement in anypic
+.nr SCALE_TO_LL 1          \" avoid image hanging over page margins
+.mso anypic.tmac           \" macro for pictures
+.mso sc.tmac               \" simple small cap macro
+.mso s-heading-space.tmac  \" different spacing for headings in groff ms
 .\" **** Settings *************************************************
 .\" left margin
 .nr PO 2.5cm
-.\" text width
+.\" text width = A4_width - 2 * left_margin
 .nr LL 21cm
 .nr LL -2*\n[PO]u
 .\" top margin
 .nr HM 2.0cm
-.\" bottom margin
+.\".\" text width:
 .\".nr LL 5.5i
 .\".\" left margin
 .\".nr PO 1.25i
@@ -53,10 +56,11 @@ $endif$
 .nr linescale $if(linescale)$$linescale$$else$1175$endif$
 .\" point size
 .nr PS $if(pointsize)$$pointsize$$else$10p$endif$
-.\" line height
+.\" calculate absolute line height unless given by variable:
 .nr VS $if(lineheight)$$lineheight$$else$\n(PS*\n[linescale]/1000u$endif$
 .\" font family: A, BM, H, HN, N, P, T, ZCM
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
+.\" ligatures do not work well unless controlled carefully, esp. for German
 .lg 0
 .\" paragraph indent
 .nr PI $if(indent)$$indent$$else$2m$endif$
