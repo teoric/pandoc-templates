@@ -57,23 +57,22 @@ $endif$
 .\" point size
 .nr PS $if(pointsize)$$pointsize$$else$10p$endif$
 .\" calculate absolute line height unless given by variable:
-.nr VS $if(lineheight)$$lineheight$$else$\n(PS*\n[linescale]/1000u$endif$
+.\"nr VS $if(lineheight)$$lineheight$$else$\n(PS*\n[linescale]/1000u$endif$
+.RESCALE_LINE
 .\" font family: A, BM, H, HN, N, P, T, ZCM
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
+.ds citefam $if(citefam)$$citefam$$else$H$endif$
+.mso citescale.tmac
+.\" citescale $if(citescale)$$citescale$$else$850$endif$
 .\" ligatures do not work well unless controlled carefully, esp. for German
-.lg 0
+.lg $if(useligatures)$1$else$0$endif$
 .\" paragraph indent
-.nr PI $if(indent)$$indent$$else$2m$endif$
+.nr PI $if(indent)$$indent$$else$1m$endif$
 .\" interparagraph space
 .\"nr PD 0.33v
 .\" footnote width
-.nr FL \n[LL]u
 .\" footnote point size
-.if t \{
-.  nr FPS \n(PS*8/10u
-.  nr FVS \n(PS*\n[linescale]*8/10/1000u
-.\}
-.if n .nr FPS \n[PS]u
+.RESCALE_FOOT
 .\"tm PS: \n(PS, VS: \n(VS
 .\"tm FPS: \n[FPS], FVS: \n[FVS]
 $if(papersize)$
