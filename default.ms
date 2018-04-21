@@ -74,6 +74,7 @@ $endif$
 .\" footnote width
 .\" footnote point size
 .RESCALE_FOOT
+.SAVE_SIZE
 .\"tm PS: \n(PS, VS: \n(VS
 .\"tm FPS: \n[FPS], FVS: \n[FVS]
 $if(papersize)$
