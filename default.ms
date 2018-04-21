@@ -61,6 +61,7 @@ $endif$
 .RESCALE_LINE
 .\" font family: A, BM, H, HN, N, P, T, ZCM
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
+.nr SCALE_QUOTE $if(scalequote)$1$else$0$endif$
 .ds citefam $if(citefam)$$citefam$$else$H$endif$
 .mso citescale.tmac
 .\" citescale $if(citescale)$$citescale$$else$850$endif$
