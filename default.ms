@@ -32,7 +32,6 @@ $endif$
 .nr FROM_PANDOC 1          \" used to controll image placement in anypic
 .nr SCALE_TO_LL 1          \" avoid image hanging over page margins
 .mso anypic.tmac           \" macro for pictures
-.mso sc.tmac               \" simple small cap macro
 .mso s-heading-space.tmac  \" different spacing for headings in groff ms
 .\" **** Settings *************************************************
 .\" left margin
