@@ -22,8 +22,14 @@ $else$
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
+\usepackage{small-spacing}
+\usepackage{enumitem}
+\setlist[itemize]{parsep=0pt, itemsep=0pt, topsep=0pt}
+\setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt}
 \setstretch{$linestretch$}
 $endif$
+\setkomafont{author}{\normalfont}
+\setkomafont{date}{\normalfont}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -36,6 +42,7 @@ $if(mathspec)$
   \ifxetex
     \usepackage{mathspec}
   \else
+    \usepackage{fontspec}
     \usepackage{unicode-math}
   \fi
 $else$
@@ -55,15 +62,44 @@ $if(monofont)$
     \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
+%% $if(mathspec)$
+%% DOES NOT WORK FOR ME:
+%%   \ifxetex
+%%     \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+%%   \else
+%%     \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+%%   \fi
+%% $else$
+%%   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+%% $endif$
 $if(mathspec)$
   \ifxetex
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
   \else
-    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \usepackage{unicode-math}
+  \setmathfont{TeX Gyre Pagella Math}
+  \setmathfont[range=\mathup]  {$mathfont$}
+  \setmathfont[range=\mathbfup]{$mathfont$ Bold}
+  \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
+  \setmathfont[range=\mathit]  {$mathfont$ Italic}
   \fi
 $else$
-  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \usepackage{unicode-math}
+  \setmathfont{TeX Gyre Pagella Math}
+  \setmathfont[range=\mathup]  {$mathfont$}
+  \setmathfont[range=\mathbfup]{$mathfont$ Bold}
+  \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
+  \setmathfont[range=\mathit]  {$mathfont$ Italic}
 $endif$
+$else$
+% \usepackage[italics]{mathastext}
+% \setmathfont{TeX Gyre Pagella Math}
+% \usepackage{unicode-math}
+% \setmathfont{Asana Math}
+% \setmathfont[range=\mathup]  {$mathfont$}
+% \setmathfont[range=\mathbfup]{$mathfont$ Bold}
+% \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
+% \setmathfont[range=\mathit]  {$mathfont$ Italic}
 $endif$
 $if(CJKmainfont)$
   \ifxetex
