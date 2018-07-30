@@ -48,7 +48,8 @@ $if(mathspec)$
 $else$
   \usepackage{unicode-math}
 $endif$
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+% no ligatures by default, really:
+\defaultfontfeatures[\rmfamily,\sffamily,\ttfamily]{Ligatures=, Mapping=,Scale=MatchLowercase}
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
 $endfor$
@@ -59,7 +60,7 @@ $if(sansfont)$
     \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
 $if(monofont)$
-    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+    \setmonofont[$if(monofontoptions)$$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
 %% $if(mathspec)$
@@ -323,6 +324,7 @@ $for(polyglossia-otherlangs)$
 $endfor$
 \fi
 $endif$
+\usepackage[autostyle=true]{csquotes}
 $if(dir)$
 \ifxetex
   % load bidi as late as possible as it modifies e.g. graphicx
