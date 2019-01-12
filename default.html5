@@ -29,7 +29,7 @@ $highlighting-css$
   </style>
 $endif$
 $for(css)$
-  <link rel="stylesheet" href="$css$">
+  <link rel="stylesheet" href="$css$" />
 $endfor$
 $if(math)$
   $math$
@@ -49,7 +49,7 @@ $include-before$
 $endfor$
 <div class="inner_container">
 $if(title)$
-<header>
+<header id="title-block-header">
 <h1 class="title">$title$</h1>
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>

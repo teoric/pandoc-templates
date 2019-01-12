@@ -1,4 +1,4 @@
-\PassOptionsToPackage{unicode=true$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
 $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
@@ -20,41 +20,6 @@ $endif$
 $for(beameroption)$
 \setbeameroption{$beameroption$}
 $endfor$
-% Prevent slide breaks in the middle of a paragraph:
-\widowpenalties 1 10000
-\raggedbottom
-$if(section-titles)$
-\setbeamertemplate{part page}{
-\centering
-\begin{beamercolorbox}[sep=16pt,center]{part title}
-  \usebeamerfont{part title}\insertpart\par
-\end{beamercolorbox}
-}
-\setbeamertemplate{section page}{
-\centering
-\begin{beamercolorbox}[sep=12pt,center]{part title}
-  \usebeamerfont{section title}\insertsection\par
-\end{beamercolorbox}
-}
-\setbeamertemplate{subsection page}{
-\centering
-\begin{beamercolorbox}[sep=8pt,center]{part title}
-  \usebeamerfont{subsection title}\insertsubsection\par
-\end{beamercolorbox}
-}
-\AtBeginPart{
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \frame{\subsectionpage}
-}
-$endif$
 $endif$
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
@@ -66,14 +31,8 @@ $else$
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
-\usepackage{small-spacing}
-\usepackage{enumitem}
-\setlist[itemize]{parsep=0pt, itemsep=0pt, topsep=0pt}
-\setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt}
 \setstretch{$linestretch$}
 $endif$
-\setkomafont{author}{\normalfont}
-\setkomafont{date}{\normalfont}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -86,68 +45,34 @@ $if(mathspec)$
   \ifxetex
     \usepackage{mathspec}
   \else
-    \usepackage{fontspec}
     \usepackage{unicode-math}
   \fi
 $else$
   \usepackage{unicode-math}
 $endif$
-% no ligatures by default, really:
-\defaultfontfeatures[\rmfamily,\sffamily,\ttfamily]{Ligatures=, Mapping=,Scale=MatchLowercase}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
 $endfor$
 $if(mainfont)$
     \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
-$if(romanfont)$
-	\setromanfont[$for(romanfontoptions)$$romanfontoptions$$sep$,$endfor$]{$romanfont$}
-$endif$
 $if(sansfont)$
     \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
 $if(monofont)$
-    \setmonofont[$if(monofontoptions)$$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
-%% $if(mathspec)$
-%% DOES NOT WORK FOR ME:
-%%   \ifxetex
-%%     \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-%%   \else
-%%     \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-%%   \fi
-%% $else$
-%%   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-%% $endif$
 $if(mathspec)$
   \ifxetex
-  \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
   \else
-  \usepackage{unicode-math}
-  \setmathfont{TeX Gyre Pagella Math}
-  \setmathfont[range=\mathup]  {$mathfont$}
-  \setmathfont[range=\mathbfup]{$mathfont$ Bold}
-  \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
-  \setmathfont[range=\mathit]  {$mathfont$ Italic}
+    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
   \fi
 $else$
-  \usepackage{unicode-math}
-  \setmathfont{TeX Gyre Pagella Math}
-  \setmathfont[range=\mathup]  {$mathfont$}
-  \setmathfont[range=\mathbfup]{$mathfont$ Bold}
-  \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
-  \setmathfont[range=\mathit]  {$mathfont$ Italic}
+  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
-$else$
-% \usepackage[italics]{mathastext}
-% \setmathfont{TeX Gyre Pagella Math}
-% \usepackage{unicode-math}
-% \setmathfont{Asana Math}
-% \setmathfont[range=\mathup]  {$mathfont$}
-% \setmathfont[range=\mathbfup]{$mathfont$ Bold}
-% \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
-% \setmathfont[range=\mathit]  {$mathfont$ Italic}
 $endif$
 $if(CJKmainfont)$
   \ifxetex
@@ -211,8 +136,6 @@ $if(colorlinks)$
 $endif$
 \usepackage{hyperref}
 \hypersetup{
-            bookmarks=true,
-            bookmarksopen=true,
 $if(title-meta)$
             pdftitle={$title-meta$},
 $endif$
@@ -225,7 +148,6 @@ $endif$
 $if(colorlinks)$
             colorlinks=true,
             linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
-            filecolor=$if(filecolor)$$filecolor$$else$Maroon$endif$,
             citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
             urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
 $else$
@@ -275,6 +197,43 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+$if(beamer)$
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+$if(section-titles)$
+\setbeamertemplate{part page}{
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{part title}
+  \usebeamerfont{part title}\insertpart\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+\centering
+\begin{beamercolorbox}[sep=12pt,center]{part title}
+  \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{part title}
+  \usebeamerfont{subsection title}\insertsubsection\par
+\end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+$endif$
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -335,7 +294,6 @@ $for(polyglossia-otherlangs)$
 $endfor$
 \fi
 $endif$
-\usepackage[autostyle=true]{csquotes}
 $if(dir)$
 \ifxetex
   % load bidi as late as possible as it modifies e.g. graphicx
@@ -355,7 +313,6 @@ $if(natbib)$
 $endif$
 $if(biblatex)$
 \usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
-\DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -404,14 +361,8 @@ $include-before$
 
 $endfor$
 $if(toc)$
-$if(toc-title)$
-\renewcommand*\contentsname{$toc-title$}
-$endif$
 $if(beamer)$
 \begin{frame}
-$if(toc-title)$
-\frametitle{$toc-title$}
-$endif$
 \tableofcontents[hideallsubsections]
 \end{frame}
 $else$
