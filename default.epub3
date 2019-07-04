@@ -5,17 +5,8 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <title>$pagetitle$</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-$if(quotes)$
-      q { quotes: "“" "”" "‘" "’"; }
-$endif$
-  </style>
 $if(highlighting-css)$
-  <style type="text/css">
+  <style>
 $highlighting-css$
   </style>
 $endif$
@@ -28,7 +19,7 @@ $endfor$
 </head>
 <body$if(coverpage)$ id="cover"$endif$$if(body-type)$ epub:type="$body-type$"$endif$>
 $if(titlepage)$
-<section epub:type="titlepage">
+<section epub:type="titlepage" class="titlepage">
 $for(title)$
 $if(title.type)$
   <h1 class="$title.type$">$title.text$</h1>
