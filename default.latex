@@ -270,14 +270,20 @@ $if(graphics)$
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\AtBeginDocument{%
+  \let\oig\includegraphics%
+  \renewcommand\includegraphics[2][]{%
+      {\centering\oig[{#1}]{#2}\par}%
+  }%
+}
+\makeatother
+% Make links footnotes instead of hotlinks:
 $endif$
 $if(links-as-notes)$
-% Make links footnotes instead of hotlinks:
 \DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
 $endif$
 $if(strikeout)$
