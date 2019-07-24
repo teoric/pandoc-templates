@@ -101,6 +101,9 @@ $endif$
 .\" PDF metadata
 .pdfinfo /Title "$title-meta$"
 .pdfinfo /Author "$author-meta$"
+$if(subject)$
+.pdfinfo /Subject "$subject$"
+$endif$
 $if(adjusting)$
 .ad $adjusting$
 $endif$
