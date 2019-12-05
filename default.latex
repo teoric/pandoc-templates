@@ -100,8 +100,10 @@ $if(linestretch)$
 \setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt}
 \setstretch{$linestretch$}
 $endif$
+\ifcsname{setkomafont}\endcsname
 \setkomafont{author}{\normalfont}
 \setkomafont{date}{\normalfont}
+\fi
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \newif\ifxetexorluatex
@@ -274,7 +276,7 @@ $else$
   hidelinks,
 $endif$
   pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+% \urlstyle{same} % disable monospaced font for URLs
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
@@ -405,6 +407,10 @@ $if(dir)$
 \ifxetex
   % Load bidi as late as possible as it modifies e.g. graphicx
   \usepackage{bidi}
+\else
+  \ifluatex
+    \usepackage{luabidi}
+  \fi
 \fi
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \TeXXeTstate=1
