@@ -100,9 +100,9 @@ $if(linestretch)$
 \setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt}
 \setstretch{$linestretch$}
 $endif$
-\ifcsname{setkomafont}\endcsname
-\setkomafont{author}{\normalfont}
-\setkomafont{date}{\normalfont}
+\ifcsname setkomafont\endcsname
+\setkomafont{author}{\normalfont\normalsize}
+\setkomafont{date}{\normalfont\normalsize}
 \fi
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -123,7 +123,9 @@ $endif$
 \else % if luatex or xetex
 $if(mathspec)$
   \ifxetex
-    \usepackage{mathspec}
+    % \usepackage{mathspec}
+    \usepackage{fontspec}
+    \usepackage{unicode-math}
   \else
     \usepackage{fontspec}
     \usepackage{unicode-math}
@@ -131,7 +133,7 @@ $if(mathspec)$
 $else$
   \usepackage{unicode-math}
 $endif$
-  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchUppercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 $if(mainfont)$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
@@ -462,8 +464,10 @@ $if(logo)$
 \logo{\includegraphics{$logo$}}
 $endif$
 $endif$
+\definecolor{darkred}{rgb}{0.6,0,0}
+\newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
 
-\begin{document}
+\begin{document}\sloppy
 $if(has-frontmatter)$
 \frontmatter
 $endif$
