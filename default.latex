@@ -111,6 +111,7 @@ $endif$
   \xetexorluatextrue
 \else
   \ifluatex
+    \usepackage{luatex85}
     \xetexorluatextrue
   \else
     \xetexorluatexfalse

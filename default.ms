@@ -63,7 +63,7 @@ $endif$
 .nr SCALE_QUOTE $if(scalequote)$1$else$0$endif$
 .ds citefam $if(citefam)$$citefam$$else$H$endif$
 .mso citescale.tmac
-.\" citescale $if(citescale)$$citescale$$else$850$endif$
+.citescale $if(citescale)$$citescale$$else$850$endif$
 .\" ligatures do not work well unless controlled carefully, esp. for German
 .lg $if(useligatures)$1$else$0$endif$
 .\" paragraph indent
