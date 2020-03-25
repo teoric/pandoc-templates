@@ -134,7 +134,7 @@ $else$
   \usepackage{unicode-math}
 $endif$
   \defaultfontfeatures{Scale=MatchUppercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \defaultfontfeatures[\rmfamily]{Ligatures={},Scale=1}
 $if(mainfont)$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
@@ -395,8 +395,8 @@ $endfor$
     tex.enableprimitives("luatex",tex.extraprimitives("luatex"))
   }
   \fi
-  \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$SBL Hebrew$endif$}
-  \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$SBL Greek$endif$}
+  \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
+  \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 \else
   \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
 $if(babel-newcommands)$
