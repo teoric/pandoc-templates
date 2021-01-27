@@ -38,14 +38,18 @@ $if(layout)$
 $endif$
 $if(pagenumbering)$
 \setuppagenumbering[$for(pagenumbering)$$pagenumbering$$sep$,$endfor$]
+$else$
+\setuppagenumbering[location={footer,middle}]
 $endif$
 $if(pdfa)$
 % attempt to generate PDF/A
 \setupbackend
-  [format=PDF/A-1b:2005,
-   intent=sRGB IEC61966-2.1,
-   profile=sRGB.icc]
+  [format=PDF/A-$pdfa$,
+   profile={$if(pdfaiccprofile)$$for(pdfaiccprofile)$$pdfaiccprofile$$sep$,$endfor$$else$sRGB.icc$endif$},
+   intent=$if(pdfaintent)$$pdfaintent$$else$sRGB IEC61966-2.1$endif$]
 $endif$
+\setupbackend[export=yes]
+\setupstructure[state=start,method=auto]
 
 % use microtypography
 \definefontfeature[default][default][script=latn, protrusion=quality, expansion=quality, itlc=yes, textitalics=yes, onum=yes, pnum=yes]
@@ -70,9 +74,9 @@ $if(interlinespace)$
 \setupinterlinespace[$for(interlinespace)$$interlinespace$$sep$,$endfor$]
 $endif$
 
-\setuphead[chapter]            [style=\tfd,header=empty]
-\setuphead[section]            [style=\tfc]
-\setuphead[subsection]         [style=\tfb]
+\setuphead[chapter]            [style=\tfd\setupinterlinespace,header=empty]
+\setuphead[section]            [style=\tfc\setupinterlinespace]
+\setuphead[subsection]         [style=\tfb\setupinterlinespace]
 \setuphead[subsubsection]      [style=\bf]
 \setuphead[subsubsubsection]   [style=\sc]
 \setuphead[subsubsubsubsection][style=\it]
@@ -105,6 +109,25 @@ $endif$
 \setupxtable[body][]
 \setupxtable[foot][bottomframe=on]
 
+$if(csl-refs)$
+\definemeasure[cslhangindent][1.5em]
+\definenarrower[hangingreferences][left=\measure{cslhangindent}]
+\definestartstop [cslreferences] [
+	$if(csl-hanging-indent)$
+	before={%
+	  \starthangingreferences[left]
+      \setupindenting[-\leftskip,yes,first]
+      \doindentation
+  	},
+  	after=\stophangingreferences,
+	$endif$
+]
+$endif$
+$if(includesource)$
+$for(sourcefile)$
+\attachment[file=$curdir$/$sourcefile$,method=hidden]
+$endfor$
+$endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -112,19 +135,19 @@ $endfor$
 \starttext
 $if(title)$
 \startalignment[middle]
-  \blank[2*big]
+  {\tfd\setupinterlinespace $title$}
   {\tfd\setupinterlinespace $title$\endgraf}
 $if(subtitle)$
   \smallskip
-  {\tfa $subtitle$}
+  {\tfa\setupinterlinespace $subtitle$}
 $endif$
 $if(author)$
   \smallskip
-  {\tfa $for(author)$$author$$sep$\crlf $endfor$}
+  {\tfa\setupinterlinespace $for(author)$$author$$sep$\crlf $endfor$}
 $endif$
 $if(date)$
   \smallskip
-  {\tfa $date$}
+  {\tfa\setupinterlinespace $date$}
 $endif$
   \bigskip
 \stopalignment
