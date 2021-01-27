@@ -146,7 +146,7 @@ $if(sansfont)$
   \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
 $if(monofont)$
-  \setmonofont[$if(monofontoptions)$$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
 $endif$
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
@@ -309,7 +309,10 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 $if(tables)$
-\usepackage{longtable,tabularx,booktabs}
+\usepackage{longtable,booktabs,array}
+$if(multirow)$
+\usepackage{multirow}
+$endif$
 \usepackage{calc} % for calculating minipage widths
 $if(beamer)$
 \usepackage{caption}
@@ -333,6 +336,7 @@ $if(graphics)$
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
@@ -343,7 +347,6 @@ $if(graphics)$
       {\centering\oig[{#1}]{#2}\par}%
   }%
 }
-\makeatother
 % Make links footnotes instead of hotlinks:
 % Set default figure placement to htbp
 \makeatletter
@@ -391,9 +394,9 @@ $if(lang)$
 \ifxetexorluatex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
-  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+  \setmainlanguage[$for(polyglossia-lang.options)$$polyglossia-lang.options$$sep$,$endfor$]{$polyglossia-lang.name$}
 $for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+  \setotherlanguage[$for(polyglossia-otherlangs.options)$$polyglossia-otherlangs.options$$sep$,$endfor$]{$polyglossia-otherlangs.name$}
 $endfor$
   \ifluatex
   \directlua{
@@ -404,6 +407,9 @@ $endfor$
   \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 \else
   \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+% % get rid of language-specific shorthands (see #6817):
+% \let\LanguageShortHands\languageshorthands
+% \def\languageshorthands#1{}
 $if(babel-newcommands)$
   $babel-newcommands$
 $endif$
@@ -594,7 +600,6 @@ $else$
 $endif$
 
 $endif$
-
 $for(include-after)$
 $include-after$
 
