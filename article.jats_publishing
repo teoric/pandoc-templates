@@ -1,13 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
-$if(xml-stylesheet)$
-<?xml-stylesheet type="text/xsl" href="$xml-stylesheet$"?>
-$endif$
-<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.0 20120330//EN"
-                  "JATS-journalpublishing1.dtd">
 $if(article.type)$
-<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.0" article-type="$article.type$">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="$article.type$">
 $else$
-<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.0" article-type="other">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="other">
 $endif$
 <front>
 <journal-meta>
@@ -20,6 +14,13 @@ $endif$
 $if(journal.pmc)$
 <journal-id journal-id-type="pmc">$journal.pmc$</journal-id>
 $endif$
+$-- Fallback: an empty journal-id in case none is available.
+$if(journal.publisher-id)$
+$elseif(journal.nlm-ta)$
+$elseif(journal.pmc)$
+$else$
+<journal-id></journal-id>
+$endif$
 <journal-title-group>
 $if(journal.title)$
 <journal-title>$journal.title$</journal-title>
@@ -29,10 +30,16 @@ $if(journal.abbrev-title)$
 $endif$
 </journal-title-group>
 $if(journal.pissn)$
-<issn pub-type="ppub">$journal.pissn$</issn>
+<issn publication-format="print">$journal.pissn$</issn>
 $endif$
 $if(journal.eissn)$
-<issn pub-type="epub">$journal.eissn$</issn>
+<issn publication-format="electronic">$journal.eissn$</issn>
+$endif$
+$-- At least one issn element is required; use empty issn as fallback
+$if(journal.pissn)$
+$elseif(journal.eissn)$
+$else$
+<issn></issn>
 $endif$
 <publisher>
 <publisher-name>$journal.publisher-name$</publisher-name>
@@ -79,7 +86,7 @@ $endif$
 $if(author)$
 <contrib-group>
 $for(author)$
-<contrib contrib-type="author">
+<contrib contrib-type="author"$if(author.equal-contrib)$ equal-contrib="true"$endif$>
 $if(author.orcid)$
 <contrib-id contrib-id-type="orcid">$author.orcid$</contrib-id>
 $endif$
@@ -88,20 +95,23 @@ $if(author.surname)$
 <surname>$author.surname$</surname>
 <given-names>$author.given-names$</given-names>
 </name>
+$elseif(author.name)$
+<string-name>$author.name$</string-name>
 $else$
 <string-name>$author$</string-name>
 $endif$
 $if(author.email)$
 <email>$author.email$</email>
 $endif$
-$if(author.aff-id)$
-<xref ref-type="aff" rid="aff-$contrib.aff-id$"/>
-$endif$
+$for(author.affiliation)$
+<xref ref-type="aff" rid="aff-$author.affiliation$"/>
+$endfor$
 $if(author.cor-id)$
 <xref ref-type="corresp" rid="cor-$author.cor-id$"><sup>*</sup></xref>
 $endif$
 </contrib>
 $endfor$
+${ affiliations.jats() }
 </contrib-group>
 $endif$
 $if(article.author-notes)$
@@ -120,7 +130,7 @@ $endif$
 </author-notes>
 $endif$
 $if(date)$
-<pub-date pub-type="epub"$if(date.iso-8601)$ iso-8601-date="$date.iso-8601$"$endif$>
+<pub-date date-type="$if(date.type)$$date.type$$else$pub$endif$" publication-format="electronic"$if(date.iso-8601)$ iso-8601-date="$date.iso-8601$"$endif$>
 $if(date.day)$
 <day>$date.day$</day>
 $endif$
@@ -164,8 +174,13 @@ $if(copyright.text)$
 <license license-type="$copyright.type$" xlink:href="$copyright.link$">
 <license-p>$copyright.text$</license-p>
 </license>
+$endif$
 </permissions>
 $endif$
+$if(abstract)$
+<abstract>
+$abstract$
+</abstract>
 $endif$
 $if(tags)$
 <kwd-group kwd-group-type="author">
@@ -193,3 +208,4 @@ $back$
 $endif$
 </back>
 </article>
+

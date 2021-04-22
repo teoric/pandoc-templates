@@ -59,6 +59,7 @@ $endif$
 .\"nr VS $if(lineheight)$$lineheight$$else$\n(PS*\n[linescale]/1000u$endif$
 .RESCALE_LINE
 .\" font family: A, BM, H, HN, N, P, T, ZCM
+<<<<<<< HEAD
 .fam $if(fontfamily)$$fontfamily$$else$T$endif$
 .nr SCALE_QUOTE $if(scalequote)$1$else$0$endif$
 .ds citefam $if(citefam)$$citefam$$else$H$endif$
@@ -70,6 +71,13 @@ $endif$
 .nr PI $if(indent)$$indent$$else$1m$endif$
 .\" interparagraph space
 .\"nr PD 0.33v
+=======
+.fam $if(fontfamily)$$fontfamily$$else$P$endif$
+.\" paragraph indent
+.nr PI $if(indent)$$indent$$else$0m$endif$
+.\" interparagraph space
+.nr PD 0.4v
+>>>>>>> jgm/master
 .\" footnote width
 .\" footnote point size
 .RESCALE_FOOT
@@ -93,6 +101,9 @@ $endif$
 .\" comment these out if you want a dot after section numbers:
 .als SN SN-NO-DOT
 .als SN-STYLE SN-NO-DOT
+.\" page numbers in footer, centered
+.rm CH
+.ds CF %
 .\" pdf outline fold level
 .nr PDFOUTLINE.FOLDLEVEL 3
 .\" start out in outline view
@@ -107,6 +118,14 @@ $endif$
 $if(adjusting)$
 .ad $adjusting$
 $endif$
+<<<<<<< HEAD
+=======
+$if(hyphenate)$
+.hy
+$else$
+.nh
+$endif$
+>>>>>>> jgm/master
 $if(has-inline-math)$
 .EQ
 delim @@

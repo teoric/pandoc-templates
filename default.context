@@ -28,7 +28,6 @@ $endif$
 % make chapter, section bookmarks visible when opening document
 \placebookmarks[chapter, section, subsection, subsubsection, subsubsubsection, subsubsubsubsection][chapter, section]
 \setupinteractionscreen[option=bookmark]
-\setuptagging[state=start]
 
 $if(papersize)$
 \setuppapersize[$for(papersize)$$papersize$$sep$,$endfor$]
@@ -102,8 +101,6 @@ $endif$
 \setupfloat[figure][default={here,nonumber}]
 \setupfloat[table][default={here,nonumber}]
 
-\setupthinrules[width=15em] % width of horizontal rules
-
 \setupxtable[frame=off]
 \setupxtable[head][topframe=on,bottomframe=on]
 \setupxtable[body][]
@@ -136,7 +133,10 @@ $endfor$
 $if(title)$
 \startalignment[middle]
   {\tfd\setupinterlinespace $title$}
+<<<<<<< HEAD
   {\tfd\setupinterlinespace $title$\endgraf}
+=======
+>>>>>>> jgm/master
 $if(subtitle)$
   \smallskip
   {\tfa\setupinterlinespace $subtitle$}
