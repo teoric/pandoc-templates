@@ -95,6 +95,9 @@ $if(fontfamily)$
 $else$
 \usepackage{lmodern}
 $endif$
+$if(small-spacing)$
+\usepackage{small-spacing}
+$endif$
 $if(linestretch)$
 \usepackage{setspace}
 \usepackage{small-spacing}
