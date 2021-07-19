@@ -335,6 +335,7 @@ $else$
 $endif$
 $endif$
 $if(graphics)$
+\usepackage[export]{adjustbox}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -350,7 +351,11 @@ $if(graphics)$
       {\centering\oig[{#1}]{#2}\par}%
   }%
 }
-% Make links footnotes instead of hotlinks:
+$if(non-floating)$
+\usepackage{float}
+\floatplacement{figure}{H}
+$else$
+
 % Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
@@ -497,6 +502,16 @@ $else$
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
+$endif$
+$if(subtitle)$
+\makeatletter
+\providecommand{\subsubtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\titlefont (#1) \par}}{}{}
+}
+\makeatother
+$endif$
+$if(subsubtitle)$
+\subsubtitle{$subsubtitle$}
 $endif$
 \subtitle{$subtitle$}
 $endif$
