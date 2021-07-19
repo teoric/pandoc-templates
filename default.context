@@ -136,11 +136,7 @@ $endfor$
 \starttext
 $if(title)$
 \startalignment[middle]
-  {\tfd\setupinterlinespace $title$}
-<<<<<<< HEAD
   {\tfd\setupinterlinespace $title$\endgraf}
-=======
->>>>>>> jgm/master
 $if(subtitle)$
   \smallskip
   {\tfa\setupinterlinespace $subtitle$}
