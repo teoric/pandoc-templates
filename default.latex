@@ -374,11 +374,11 @@ $if(non-floating)$
 \usepackage{float}
 \floatplacement{figure}{H}
 $else$
-
 % Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+$endif$
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
