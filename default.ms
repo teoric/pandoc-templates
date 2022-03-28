@@ -95,7 +95,7 @@ $endif$
 .als SN-STYLE SN-NO-DOT
 .\" page numbers in footer, centered
 .rm CH
-.ds CF %
+.\".ds CF %
 .\" pdf outline fold level
 .nr PDFOUTLINE.FOLDLEVEL 3
 .\" start out in outline view
