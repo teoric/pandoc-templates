@@ -433,7 +433,11 @@ $if(lang)$
 $for(babel-otherlangs)$
 \babelprovide[import]{$babel-otherlangs$}
 $endfor$
-\babelfont[hebrew,yiddish]{rm}{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
+\babelprovide[import]{hebrew}
+\babelprovide[import]{yiddish}
+\babelprovide[import]{greek}
+\babelprovide[import]{ancientgreek}
+\babelfont[hebrew]{rm}{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \babelfont[ancientgreek,greek]{rm}{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
@@ -469,6 +473,17 @@ $endif$
 $if(biblatex)$
 \usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
+\AtEveryBibitem{%
+  \clearlist{language}%
+}
+\DefineBibliographyStrings{german}{%
+  sequens = {f\adddot},
+  sequentes = {ff\adddot},
+}
+\DefineBibliographyStrings{english}{%
+  sequens = {f\adddot},
+  sequentes = {ff\adddot},
+}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
