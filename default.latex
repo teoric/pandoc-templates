@@ -433,6 +433,8 @@ $if(lang)$
 $for(babel-otherlangs)$
 \babelprovide[import]{$babel-otherlangs$}
 $endfor$
+\babelfont[hebrew,yiddish]{rm}{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
+\babelfont[ancientgreek,greek]{rm}{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
@@ -502,9 +504,7 @@ $if(csl-refs)$
 %   {\par}
 % %/ old version
 $endif$
-$if(csquotes)$
-\usepackage{csquotes}
-$endif$
+\usepackage[autostyle=true]{csquotes}
 $if(titlehead)$
 \titlehead{$titlehead$}
 $endif$
