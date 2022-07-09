@@ -104,6 +104,10 @@ $endif$
 \ifcsname setkomafont\endcsname
 \setkomafont{author}{\normalfont\normalsize}
 \setkomafont{date}{\normalfont\normalsize}
+$if(serif-headings)$
+\addtokomafont{disposition}{\rmfamily}
+\addtokomafont{descriptionlabel}{\rmfamily}
+$endif$
 \fi
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -471,7 +475,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$,$else$style=authoryear-icomp,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
