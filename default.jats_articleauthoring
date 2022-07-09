@@ -14,6 +14,9 @@ $endif$
 $if(title)$
 <title-group>
 <article-title>$title$</article-title>
+$if(subtitle)$
+<subtitle>${subtitle}</subtitle>
+$endif$
 </title-group>
 $endif$
 $if(author)$
@@ -33,36 +36,40 @@ $elseif(author.name)$
 $else$
 <string-name>$author$</string-name>
 $endif$
+$for(author.affiliation)$
+${ it:affiliations.jats() }
+$endfor$
 $if(author.email)$
 <email>$author.email$</email>
 $endif$
-$for(author.affiliation)$
-<xref ref-type="aff" rid="aff-$author.affiliation$"/>
-$endfor$
 $if(author.cor-id)$
 <xref ref-type="corresp" rid="cor-$author.cor-id$"><sup>*</sup></xref>
 $endif$
 </contrib>
 $endfor$
-${ affiliations.jats() }
 </contrib-group>
 $endif$
 $if(copyright)$
 <permissions>
-$if(copyright.statement)$
+$for(copyright.statement)$
 <copyright-statement>$copyright.statement$</copyright-statement>
-$endif$
-$if(copyright.year)$
+$endfor$
+$for(copyright.year)$
 <copyright-year>$copyright.year$</copyright-year>
-$endif$
-$if(copyright.holder)$
+$endfor$
+$for(copyright.holder)$
 <copyright-holder>$copyright.holder$</copyright-holder>
-$endif$
+$endfor$
 $if(copyright.text)$
 <license license-type="$copyright.type$" xlink:href="$copyright.link$">
 <license-p>$copyright.text$</license-p>
 </license>
 $endif$
+$for(license)$
+<license$if(it.type)$ license-type="${it.type}"$endif$$if(it.link)$ xlink:href="${it.link}"$endif$>
+<license-p>$if(it.text)$${it.text}$else$${it}$endif$</license-p>
+</license>
+$endfor$
 </permissions>
 $endif$
 <abstract>
