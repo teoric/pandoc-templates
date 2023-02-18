@@ -39,6 +39,7 @@ $if(background-image)$
 }
 $endif$
 \usepackage{pgfpages}
+\usepackage{relsize}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
@@ -50,36 +51,42 @@ $endfor$
 \widowpenalties 1 10000
 \raggedbottom
 $if(section-titles)$
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
 \setbeamertemplate{part page}{
-  \centering
-  \begin{beamercolorbox}[sep=16pt,center]{part title}
-    \usebeamerfont{part title}\insertpart\par
+  \vskip 0.6\textheight
+  \begin{beamercolorbox}[sep=1em, leftskip=1ex, rightskip=1ex, shadow=true]{title}
+    \vskip.25ex\usebeamerfont{part title}\thepart.~\,\insertpart\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{section page}{
-  \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
-    \usebeamerfont{section title}\insertsection\par
+  \vskip 0.6\textheight
+  \begin{beamercolorbox}[sep=1em, leftskip=1ex, rightskip=1ex, shadow=true]{title}
+    \vskip.25ex\usebeamerfont{section title}\thesection~\,\insertsection\par
+  \end{beamercolorbox}
+}
+\defbeamertemplate*{starredsection page}{default}[1][t]{
+  \vskip 0.6\textheight
+  \begin{beamercolorbox}[sep=1em, leftskip=1ex, rightskip=1ex, shadow=true]{title}
+    \vskip.25ex\usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
-    \usebeamerfont{subsection title}\insertsubsection\par
+  \vskip 0.6\textheight
+  \begin{beamercolorbox}[sep=1em, leftskip=1ex, rightskip=1ex, shadow=true]{title}
+    \vskip.25ex\usebeamerfont{subsection title}\thesection.\thesubsection~\,\insertsubsection\par
   \end{beamercolorbox}
 }
 \AtBeginPart{
   \frame{\partpage}
 }
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \frame{\sectionpage}
-  \fi
+\AtBeginSection[\frame{\usebeamertemplate{starredsection page}}]{
+  \frame[t]{\sectionpage}
 }
-\AtBeginSubsection{
-  \frame{\subsectionpage}
+\AtBeginSubsection[\frame{\usebeamertemplate{starredsection page}}]{
+  \frame[t]{\subsectionpage}
 }
+
 $endif$
 $endif$
 $if(beamerarticle)$
@@ -132,7 +139,7 @@ $endif$
 $if(mathfont)$
 $if(mathspec)$
   \ifXeTeX
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$math $}
   \else
   \usepackage{unicode-math}
   \setmathfont{TeX Gyre Pagella Math}
@@ -160,7 +167,8 @@ $else$
 % \setmathfont[range=\mathit]  {$mathfont$ Italic}
 $endif$
   \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures={},Scale=1}
+  % \defaultfontfeatures{Scale=MatchUppercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures={}}
 
 \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
@@ -581,7 +589,39 @@ $endif$
 \definecolor{darkred}{rgb}{0.6,0,0}
 \newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
 
+$if(beamer)$
+\definecolor{blueish}{rgb}{.89,.89,0.9}
+\preto\columns{\medskip}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamersize{description width = 2em}
+\setbeamerfont{title page}{family=\sffamily}
+\setbeamerfont{title}{size=\huge, series=\bfseries, family=\sffamily}
+\setbeamerfont{frametitle}{series=\bfseries, family=\sffamily}
+\setbeamerfont{block title}{size=\small, series=\bfseries, family=\sffamily}
+\setbeamerfont{description item}{series=\bfseries, family=\rmfamily}
+\setbeamercolor{bibliography item}{parent=palette primary}
+\setbeamercolor{bibliography item author}{parent=palette primary}
+\setbeamercolor{bibliography item title}{parent=palette primary}
+\setbeamercolor{bibliography item location}{parent=palette primary}
+\setbeamerfont{quote}{shape=\upshape,family=\sffamily}
+\setbeamerfont{quotation}{shape=\upshape,family=\sffamily}
+\setbeamercolor{block title}{bg=blueish}
+%\setbeamercolor{block begin}{bg=blueish, fg=black}
+\setbeamercolor{block body}{bg=yellow!50}
+% \setbeamercolor{background canvas}{bg=white}
+%\setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!20!bg}
+%\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor{alerted text}{fg=darkred}
+
+\setbeamertemplate{itemize item}{\raisebox{.1ex}{\textbf{–}}}
+\setbeamertemplate{itemize subitem}{\raisebox{.1ex}{\textbf{–}}}
+\setbeamertemplate{itemize subsubitem}{\raisebox{.1ex}{\textbf{–}}}
+
+$endif$
+
 \begin{document}\sloppy
+
 $if(has-frontmatter)$
 \frontmatter
 $endif$
