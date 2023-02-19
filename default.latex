@@ -32,6 +32,7 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+\usepackage{relsize}
 $if(beamer)$
 $if(background-image)$
 \usebackgroundtemplate{%
@@ -39,7 +40,6 @@ $if(background-image)$
 }
 $endif$
 \usepackage{pgfpages}
-\usepackage{relsize}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
