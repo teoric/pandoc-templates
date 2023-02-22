@@ -587,6 +587,8 @@ $if(logo)$
 $endif$
 $endif$
 \definecolor{darkred}{rgb}{0.6,0,0}
+\newcommand{\rechts}[1]{\hfill\mbox{#1}}
+\newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
 \newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
 
 $if(beamer)$
