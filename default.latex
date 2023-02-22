@@ -580,7 +580,15 @@ $if(institute)$
 \institute{$for(institute)$$institute$$sep$ \and $endfor$}
 $endif$
 $if(titlegraphic)$
+$if(titlegraphic-right)$
+\titlegraphic{\llap{\includegraphics{$titlegraphic$}}}
+$else$
+$if(titlegraphic-left)$
+\titlegraphic{\rlap{\includegraphics{$titlegraphic$}}}
+$else$
 \titlegraphic{\includegraphics{$titlegraphic$}}
+$endif$
+$endif$
 $endif$
 $if(logo)$
 \logo{\includegraphics{$logo$}}
