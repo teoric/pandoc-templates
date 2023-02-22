@@ -581,10 +581,10 @@ $if(institute)$
 $endif$
 $if(titlegraphic)$
 $if(titlegraphic-right)$
-\titlegraphic{\llap{\includegraphics{$titlegraphic$}}}
+\titlegraphic{\hfill{\includegraphics{$titlegraphic$}}}
 $else$
 $if(titlegraphic-left)$
-\titlegraphic{\rlap{\includegraphics{$titlegraphic$}}}
+\titlegraphic{{\includegraphics{$titlegraphic$}}\hfill}
 $else$
 \titlegraphic{\includegraphics{$titlegraphic$}}
 $endif$
