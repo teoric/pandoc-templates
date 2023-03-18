@@ -1,6 +1,7 @@
 \RequirePackage{fixltx2e}
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\usepackage{hyperxmp}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $if(dir)$
@@ -613,8 +614,15 @@ $if(beamer)$
 \setbeamercolor{bibliography item author}{parent=palette primary}
 \setbeamercolor{bibliography item title}{parent=palette primary}
 \setbeamercolor{bibliography item location}{parent=palette primary}
+$if(philological-quotes)$
+\newfontfamily\quotefont[Contextuals=Alternate]{Junicode}
+\nolig{ſt}{ſ|t}
+\setbeamerfont{quote}{shape=\upshape,family=\quotefont}
+\setbeamerfont{quotation}{shape=\upshape,family=\quotefont}
+$else
 \setbeamerfont{quote}{shape=\upshape,family=\sffamily}
 \setbeamerfont{quotation}{shape=\upshape,family=\sffamily}
+$endif$
 \setbeamercolor{block title}{bg=blueish}
 %\setbeamercolor{block begin}{bg=blueish, fg=black}
 \setbeamercolor{block body}{bg=yellow!50}
