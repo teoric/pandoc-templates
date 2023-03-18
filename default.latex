@@ -1,7 +1,6 @@
 \RequirePackage{fixltx2e}
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
-\usepackage{hyperxmp}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $if(dir)$
@@ -33,6 +32,7 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+\usepackage{hyperxmp}
 \usepackage{relsize}
 $if(beamer)$
 $if(background-image)$
@@ -619,7 +619,7 @@ $if(philological-quotes)$
 \nolig{ſt}{ſ|t}
 \setbeamerfont{quote}{shape=\upshape,family=\quotefont}
 \setbeamerfont{quotation}{shape=\upshape,family=\quotefont}
-$else
+$else$
 \setbeamerfont{quote}{shape=\upshape,family=\sffamily}
 \setbeamerfont{quotation}{shape=\upshape,family=\sffamily}
 $endif$
