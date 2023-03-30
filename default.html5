@@ -40,6 +40,9 @@ $for(include-before)$
 $include-before$
 $endfor$
 <div class="inner_container">
+$if(supertitle)$
+<p class="supertitle">$supertitle$</p>
+$endif$
 $if(title)$
 <header id="title-block-header">
 <h1 class="title">$title$</h1>
