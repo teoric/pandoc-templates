@@ -2,7 +2,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 $if(dir)$
 $if(latex-dir-rtl)$
 \PassOptionsToPackage{RTLdocument}{bidi}
@@ -242,6 +242,56 @@ $endif$
 $if(outertheme)$
 \useoutertheme{$outertheme$}
 $endif$
+
+\usepackage{changepage}
+% use rounded blocks with shadow
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkorange}{rgb}{1,0.5,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+
+\colorlet{BoxAVorderOben}{white}
+\colorlet{BoxAHinterOben}{darkgreen!80}
+\colorlet{BoxAVorderUnten}{black}
+\colorlet{BoxAHinterUnten}{green!20}
+\colorlet{BoxBVorderOben}{white}
+\colorlet{BoxBHinterOben}{darkorange!95}
+\colorlet{BoxBVorderUnten}{black}
+\colorlet{BoxBHinterUnten}{orange!30}
+\colorlet{BoxCVorderOben}{white}
+\colorlet{BoxCHinterOben}{darkred!70}
+\colorlet{BoxCVorderUnten}{black}
+\colorlet{BoxCHinterUnten}{red!20}
+\colorlet{BoxDVorderOben}{white}
+\colorlet{BoxDHinterOben}{darkblue!80}
+\colorlet{BoxDVorderUnten}{black}
+\colorlet{BoxDHinterUnten}{blue!20}
+
+% define Boxes:
+\newenvironment{goodbox}[1]{\centering%
+\setbeamercolor{block title}{fg=BoxAVorderOben,bg=BoxAHinterOben}%
+\setbeamercolor{block body}{fg=BoxAVorderUnten,bg=BoxAHinterUnten}%
+\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+{\end{adjustwidth}\end{block}}
+
+\newenvironment{acceptbox}[1]{\centering%
+\setbeamercolor{block title}{fg=BoxBVorderOben,bg=BoxBHinterOben}%
+\setbeamercolor{block body}{fg=BoxBVorderUnten,bg=BoxBHinterUnten}%
+\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+{\end{adjustwidth}\end{block}}
+
+\newenvironment{badbox}[1]{\centering%
+\setbeamercolor{block title}{fg=BoxCVorderOben,bg=BoxCHinterOben}%
+\setbeamercolor{block body}{fg=BoxCVorderUnten,bg=BoxCHinterUnten}%
+\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+{\end{adjustwidth}\end{block}}
+
+\newenvironment{bluebox}[1]{\centering%
+\setbeamercolor{block title}{fg=BoxDVorderOben,bg=BoxDHinterOben}%
+\setbeamercolor{block body}{fg=BoxDVorderUnten,bg=BoxDHinterUnten}%
+\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+{\end{adjustwidth}\end{block}}
 $endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -595,7 +645,6 @@ $if(logo)$
 \logo{\includegraphics{$logo$}}
 $endif$
 $endif$
-\definecolor{darkred}{rgb}{0.6,0,0}
 \newcommand{\rechts}[1]{\hfill\mbox{#1}}
 \newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
 \newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}

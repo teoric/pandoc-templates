@@ -4,6 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
+$if(base-url)$
+<base href="$base-url$"/>
+$endif$
 $for(author-meta)$
   <meta name="author" content="$author-meta$" />
 $endfor$
@@ -39,6 +42,9 @@ $endfor$
 <div class="inner_container">
 $if(title)$
 <div id="$idprefix$header">
+$if(supertitle)$
+<h1 class="supertitle">$supertitle$</h1>
+$endif$
 <h1 class="title">$title$</h1>
 $if(subtitle)$
 <h1 class="subtitle">$subtitle$</h1>
