@@ -459,7 +459,7 @@ $endif$
 $for(babel-otherlangs)$
 \babelprovide[import]{$babel-otherlangs$}
 $endfor$
-\babelprovide[import]{hebrew}
+%\babelprovide[import]{hebrew}
 \babelprovide[import]{yiddish}
 \babelprovide[import]{greek}
 \babelprovide[import]{ancientgreek}
