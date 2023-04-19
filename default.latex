@@ -322,6 +322,11 @@ $if(beamer)$
 $else$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
+$else$
+$if(beamer)$
+$else$
+\usepackage[top=1.5cm,left=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
+$endif$
 $endif$
 $if(beamer)$
 \newif\ifbibliography
