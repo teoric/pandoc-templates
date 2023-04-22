@@ -192,6 +192,10 @@ $if(CJKmainfont)$
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
   \fi
 $endif$
+$if(quotefont)$
+\newfontfamily\quotefont{$quotefont$}
+\AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
+$endif$
 $if(luatexjapresetoptions)$
   \ifLuaTeX
     \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
