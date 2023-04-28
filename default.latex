@@ -2,7 +2,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $if(dir)$
 $if(latex-dir-rtl)$
 \PassOptionsToPackage{RTLdocument}{bidi}
@@ -34,6 +34,7 @@ $endfor$
 ]{$documentclass$}
 \usepackage{hyperxmp}
 \usepackage{relsize}
+\usepackage{xcolor}
 $if(beamer)$
 $if(background-image)$
 \usebackgroundtemplate{%
@@ -396,7 +397,10 @@ $endif$
 $endif$
 $if(strikeout)$
 $-- also used for underline
-\usepackage[normalem]{ulem}
+\usepackage{soul}
+% \usepackage[normalem]{ulem}
+% \let\st\sout
+% \let\ul\uline
 $endif$
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
