@@ -176,7 +176,7 @@ $endif$
 \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 
-\setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$}
+\setmainfont[$if(mainfontoptions)$$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$else$$if(mainfont)$$else$Scale=MatchUppercase$endif$$endif$]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$}
 
 \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$if(sansfont)$$sansfont$$else$Fira Sans$endif$}
 \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$if(monofont)$$monofont$$else$Fira Mono$endif$}
@@ -190,7 +190,7 @@ $if(CJKmainfont)$
   \fi
 $endif$
 $if(quotefont)$
-\newfontfamily\quotefont{$quotefont$}
+\newfontfamily\quotefont{$quotefont$}[$for(quotefontoptions)$$quotefontoptions$$sep$,$endfor$]
 \AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
 $endif$
 $if(luatexjapresetoptions)$
