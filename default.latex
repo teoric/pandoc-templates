@@ -40,6 +40,9 @@ $if(background-image)$
 \usebackgroundtemplate{%
   \includegraphics[width=\paperwidth]{$background-image$}%
 }
+% In beamer background-image does not work well when other images are used, so this is the workaround
+\pgfdeclareimage[width=\paperwidth,height=\paperheight]{background}{$background-image$}
+\usebackgroundtemplate{\pgfuseimage{background}}
 $endif$
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
@@ -194,6 +197,8 @@ $if(quotefont)$
 \newfontfamily\quotefont{$quotefont$}[$for(quotefontoptions)$$quotefontoptions$$sep$,$endfor$]
 \AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
 $endif$
+\newfontfamily\emojifont{Noto Color Emoji}[Renderer = HarfBuzz]
+\newcommand{\emojiText}[1]{{\emojifont{}#1}}
 $if(luatexjapresetoptions)$
   \ifLuaTeX
     \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
@@ -370,7 +375,8 @@ $endif$
 $endif$
 $if(graphics)$
 \usepackage[export]{adjustbox}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
+\usepackage{grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -397,10 +403,19 @@ $endif$
 $endif$
 $if(strikeout)$
 $-- also used for underline
-\usepackage{soul}
-% \usepackage[normalem]{ulem}
-% \let\st\sout
-% \let\ul\uline
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+$if(CJKmainfont)$
+  \ifXeTeX
+    % soul's \st doesn't work for CJK:
+    \usepackage{xeCJKfntef}
+    \renewcommand{\st}[1]{\sout{#1}}
+  \fi
+$endif$
+\fi
 $endif$
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
@@ -409,6 +424,9 @@ $if(numbersections)$
 \setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+$endif$
+$if(subfigure)$
+\usepackage{subcaption}
 $endif$
 $if(beamer)$
 $else$
@@ -433,24 +451,42 @@ $endif$
   }
   \fi
 $if(csl-refs)$
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+% avoid brackets around text for \cite:
+\makeatletter
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+\newlength{\cslentryspacing}
+\setlength{\cslentryspacing}{0em}
+\usepackage{enumitem}
+\newlist{CSLReferences}{itemize}{1}
+\setlist[CSLReferences]{label={},
+  leftmargin=\cslhangindent,
+  itemindent=-1\cslhangindent,
+  parsep=\parskip,
+  itemsep=\cslentryspacing}
+% \newlength{\cslentryspacingunit} % times entry-spacing
+% \setlength{\cslentryspacingunit}{\parskip}
+% \newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+%  {% don't indent paragraphs
+%   \setlength{\parindent}{0pt}
+%   % turn on hanging indent if param 1 is 1
+%   \ifodd #1
+%   \let\oldpar\par
+%   \def\par{\hangindent=\cslhangindent\oldpar}
+%   \fi
+%   % set entry spacing
+%   \setlength{\parskip}{#2\cslentryspacingunit}
+%  }%
+%  {}
 \usepackage{calc}
 \newcommand{\CSLBlock}[1]{#1\hfill\break}
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
@@ -477,6 +513,9 @@ $endfor$
   \babelfont[hebrew]{rm}{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
   \babelfont[ancientgreek,greek]{rm}{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 \fi
+$for(babelfonts/pairs)$
+\babelfont[$babelfonts.key$]{rm}{$babelfonts.value$}
+$endfor$
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
