@@ -193,10 +193,6 @@ $if(CJKmainfont)$
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
   \fi
 $endif$
-$if(quotefont)$
-\newfontfamily\quotefont{$quotefont$}[$for(quotefontoptions)$$quotefontoptions$$sep$,$endfor$]
-\AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
-$endif$
 \newfontfamily\emojifont{Noto Color Emoji}[Renderer = HarfBuzz]
 \newcommand{\emojiText}[1]{{\emojifont{}#1}}
 $if(luatexjapresetoptions)$
@@ -697,6 +693,7 @@ $endif$
 \newcommand{\rechts}[1]{\hfill\mbox{#1}}
 \newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
 \newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
+\newfontfamily\unifont[Contextuals=Alternate]{Junicode}
 
 $if(beamer)$
 \definecolor{blueish}{rgb}{.89,.89,0.9}
@@ -713,14 +710,20 @@ $if(beamer)$
 \setbeamercolor{bibliography item title}{parent=palette primary}
 \setbeamercolor{bibliography item location}{parent=palette primary}
 $if(philological-quotes)$
-\newfontfamily\quotefont[Contextuals=Alternate]{Junicode}
+\newfontfamily\quotefont[Contextuals=Alternate,Scale=MatchUppercase]{$if(quotefont)$$quotefont$$else$Junicode$endif$}
 \nolig{ſt}{ſ|t}
+$else$
+  $if(quotefont)$
+  \newfontfamily\quotefont[Contextuals=Alternate,Scale=MatchUppercase]{$quotefont$}
+  $endif$
+$endif$
+\ifdefined\quotefont
 \setbeamerfont{quote}{shape=\upshape,family=\quotefont}
 \setbeamerfont{quotation}{shape=\upshape,family=\quotefont}
-$else$
+\else
 \setbeamerfont{quote}{shape=\upshape,family=\sffamily}
 \setbeamerfont{quotation}{shape=\upshape,family=\sffamily}
-$endif$
+\fi
 \setbeamercolor{block title}{bg=blueish}
 %\setbeamercolor{block begin}{bg=blueish, fg=black}
 \setbeamercolor{block body}{bg=yellow!50}
@@ -734,6 +737,13 @@ $endif$
 \setbeamertemplate{itemize subitem}{\raisebox{.1ex}{\textbf{–}}}
 \setbeamertemplate{itemize subsubitem}{\raisebox{.1ex}{\textbf{–}}}
 
+$endif$
+$if(beamer)$
+$else$
+$if(quotefont)$
+\newfontfamily\quotefont{$quotefont$}[$for(quotefontoptions)$$quotefontoptions$$sep$,$endfor$]
+\AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
+$endif$
 $endif$
 
 \begin{document}\sloppy
