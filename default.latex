@@ -32,7 +32,9 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+$if(beamer)$
 \usepackage{hyperxmp}
+$endif$
 \usepackage{relsize}
 \usepackage{xcolor}
 $if(beamer)$
@@ -670,7 +672,12 @@ $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
-\date{$date$}
+\date{$date$
+$if(title-logo)$
+\\[5em]
+
+\hbox{\hspace{.6\textwidth}\includegraphics[scale=1]{$title-logo$}}
+$endif$}
 $if(beamer)$
 $if(institute)$
 \institute{$for(institute)$$institute$$sep$ \and $endfor$}
@@ -704,7 +711,7 @@ $if(beamer)$
 \setbeamerfont{title}{size=\huge, series=\bfseries, family=\sffamily}
 \setbeamerfont{frametitle}{series=\bfseries, family=\sffamily}
 \setbeamerfont{block title}{size=\small, series=\bfseries, family=\sffamily}
-\setbeamerfont{description item}{series=\bfseries, family=\rmfamily}
+\setbeamerfont{description item}{series=\bfseries, family=\sffamily}
 \setbeamercolor{bibliography item}{parent=palette primary}
 \setbeamercolor{bibliography item author}{parent=palette primary}
 \setbeamercolor{bibliography item title}{parent=palette primary}
