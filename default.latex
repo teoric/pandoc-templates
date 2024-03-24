@@ -744,7 +744,6 @@ $if(quotefont)$
 \AtBeginEnvironment{quote}{\quotefont{}$if(smallquotes)$\small{}$endif$}
 $endif$
 $endif$
-
 \begin{document}\sloppy
 
 $if(has-frontmatter)$
@@ -755,6 +754,9 @@ $if(beamer)$
 \frame{\titlepage}
 $else$
 \maketitle
+$endif$
+$if(empty-first-page)$
+\thispagestyle{empty}
 $endif$
 $if(abstract)$
 \begin{abstract}
