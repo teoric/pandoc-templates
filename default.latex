@@ -173,8 +173,11 @@ $else$
 % \setmathfont[range=\mathbfit]{$mathfont$ Bold Italic}
 % \setmathfont[range=\mathit]  {$mathfont$ Italic}
 $endif$
+$if(font-scale-match-upper)$
+\defaultfontfeatures{Scale=MatchUppercase}
+$else$
 \defaultfontfeatures{Scale=MatchLowercase}
-% \defaultfontfeatures{Scale=MatchUppercase}
+$endif$
 $if(allowligatures)$
 $else$
 \defaultfontfeatures[\rmfamily]{Ligatures={}}
@@ -692,8 +695,11 @@ $endif$
 \newcommand{\rechts}[1]{\hfill\mbox{#1}}
 \newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
 \newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
+\ifPDFTeX
+\newcommand{\unifont}{\empty}
+\else
 \newfontfamily\unifont[Contextuals=Alternate]{Junicode}
-
+\fi
 $if(beamer)$
 \definecolor{blueish}{rgb}{.89,.89,0.9}
 \preto\columns{\medskip}
