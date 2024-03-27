@@ -179,6 +179,12 @@ $else$
 \defaultfontfeatures{Scale=MatchLowercase,Contextuals=Alternate}
 $endif$
 \defaultfontfeatures+{Contextuals={Alternate}}
+$if(historical-ligatures)$
+\defaultfontfeatures+{Ligatures={Historical}}
+$endif$
+$if(discretionary-ligatures)$
+\defaultfontfeatures+{Ligatures={Discretionary}}
+$endif$
 $if(ligatures)$
 $else$
 \defaultfontfeatures+{Ligatures={NoCommon}}
