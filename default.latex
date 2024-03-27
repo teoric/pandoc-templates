@@ -143,6 +143,10 @@ $endif$
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
+$if(ligatures)$
+$else$
+\defaultfontfeatures+{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
+$endif$
 $if(mathfont)$
 $if(mathspec)$
   \ifXeTeX
@@ -180,15 +184,12 @@ $else$
 $endif$
 \defaultfontfeatures+{Contextuals={Alternate}}
 $if(historical-ligatures)$
-\defaultfontfeatures+{Ligatures={Historical}}
+\defaultfontfeatures+{Ligatures={Historic}}
 $endif$
 $if(discretionary-ligatures)$
 \defaultfontfeatures+{Ligatures={Discretionary}}
 $endif$
-$if(ligatures)$
-$else$
-\defaultfontfeatures+{Ligatures={NoCommon}}
-$endif$
+\defaultfontfeatures+[\ttfamily]{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
 \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 
