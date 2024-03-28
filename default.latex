@@ -197,7 +197,6 @@ $endif$
 
 \ifPDFTeX\else
   % xetex/luatex font selection
-$if(mainfont)$
   $if(mainfontfallback)$
     \ifLuaTeX
       \usepackage{luaotfload}
@@ -206,9 +205,7 @@ $if(mainfont)$
       })}
     \fi
   $endif$
-  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
-$endif$
-$if(sansfont)$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$}
   $if(sansfontfallback)$
     \ifLuaTeX
       \usepackage{luaotfload}
@@ -217,9 +214,7 @@ $if(sansfont)$
       })}
     \fi
   $endif$
-  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$$if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
-$endif$
-$if(monofont)$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$$if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$if(sansfont)$$sansfont$$else$Fira Sans$endif$}
   $if(monofontfallback)$
     \ifLuaTeX
       \usepackage{luaotfload}
@@ -228,8 +223,7 @@ $if(monofont)$
       })}
     \fi
   $endif$
-  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
-$endif$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$if(monofont)$$monofont$$else$Fira Mono$endif$}
 \setmathfont{TeX Gyre Pagella Math}
 $if(mathfont)$
 \setmathfont{$mathfont$}
@@ -252,10 +246,6 @@ $endif$
 \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 
-\setmainfont[$if(mainfontoptions)$$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$else$$if(mainfont)$$else$Scale=MatchUppercase$endif$$endif$]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$}
-
-\setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$if(sansfont)$$sansfont$$else$Fira Sans$endif$}
-\setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$if(monofont)$$monofont$$else$Fira Mono$endif$}
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$for(fontfamilies.options)$$fontfamilies.options$$sep$,$endfor$]{$fontfamilies.font$}
 $endfor$
