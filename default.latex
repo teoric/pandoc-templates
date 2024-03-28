@@ -137,6 +137,7 @@ $endif$
   \ifLuaTeX
     \usepackage{luatex85}
     \usepackage{lua-widow-control}
+    \lwcsetup{$if(lua-widow-control-preset)$$lua-widow-control-preset$$else$balanced$endif$}
     \xetexorluatextrue
   \else
     \xetexorluatexfalse
@@ -302,7 +303,7 @@ $endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
+  \usepackage[$if(microtypeoptions)$$else$babel$endif$$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 $if(indent)$
