@@ -105,11 +105,6 @@ $if(beamerarticle)$
 $endif$
 \usepackage{amsmath,amssymb}
 \usepackage{calc} % for calculating minipage widths
-$if(fontfamily)$
-\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$else$
-\usepackage{lmodern}
-$endif$
 $if(small-spacing)$
 \usepackage{small-spacing}
 $endif$
@@ -148,29 +143,102 @@ $endif$
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-$if(ligatures)$
+$if(mathspec)$
+  \ifXeTeX
+    \usepackage{mathspec} % this also loads fontspec
+  \else
+    \usepackage{unicode-math} % this also loads fontspec
+  \fi
 $else$
+  \usepackage{unicode-math} % this also loads fontspec
 $endif$
-\usepackage{unicode-math}
-\defaultfontfeatures+[\ttfamily]{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
+  \defaultfontfeatures+[\ttfamily]{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
+  $if(font-scale-match-upper)$
+  \defaultfontfeatures{Scale=MatchUppercase}
+  $else$
+  \defaultfontfeatures{Scale=MatchLowercase}$-- must come before Beamer theme
+  $endif$
+  $if(no-contextuals)$
+  $else$
+  \defaultfontfeatures+{Ligatures={Contextual,NoCommon}}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  $endif$
+\fi
+$if(fontfamily)$
+$else$
+$-- Set default font before Beamer theme so the theme can override it
+\usepackage{lmodern}
+$endif$
+$-- Set Beamer theme before user font settings so they can override theme
+$if(beamer)$
+$if(theme)$
+\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
+$endif$
+$if(colortheme)$
+\usecolortheme{$colortheme$}
+$endif$
+$if(fonttheme)$
+\usefonttheme{$fonttheme$}
+$endif$
+$if(mainfont)$
+\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+$endif$
+$if(innertheme)$
+\useinnertheme{$innertheme$}
+$endif$
+$if(outertheme)$
+\useoutertheme{$outertheme$}
+$endif$
+$endif$
+$-- User font settings (must come after default font and Beamer theme)
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+
+\ifPDFTeX\else
+  % xetex/luatex font selection
+$if(mainfont)$
+  $if(mainfontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("mainfontfallback",{
+        $for(mainfontfallback)$"$mainfontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
+$endif$
+$if(sansfont)$
+  $if(sansfontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("sansfontfallback",{
+        $for(sansfontfallback)$"$sansfontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$$if(sansfontfallback)$,RawFeature={fallback=sansfontfallback}$endif$]{$sansfont$}
+$endif$
+$if(monofont)$
+  $if(monofontfallback)$
+    \ifLuaTeX
+      \usepackage{luaotfload}
+      \directlua{luaotfload.add_fallback("monofontfallback",{
+        $for(monofontfallback)$"$monofontfallback$"$sep$,$endfor$
+      })}
+    \fi
+  $endif$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$monofont$}
+$endif$
 \setmathfont{TeX Gyre Pagella Math}
 $if(mathfont)$
 \setmathfont{$mathfont$}
 $else$
-\setmathfont{TeX Gyre Pagella Math}
-$endif$
+$--\setmathfont{TeX Gyre Pagella Math}
 \setmathfont[range=\mathup]  {$mainfont$}
 \setmathfont[range=\mathbfup]{$mainfont$ Bold}
 \setmathfont[range=\mathbfit]{$mainfont$ Bold Italic}
 \setmathfont[range=\mathit]  {$mainfont$ Italic}
-$if(font-scale-match-upper)$
-\defaultfontfeatures{Scale=MatchUppercase}
-$else$
-\defaultfontfeatures{Scale=MatchLowercase}
-$endif$
-$if(no-contextuals)$
-$else$
-\defaultfontfeatures+{Ligatures={Contextual,NoCommon}}
 $endif$
 $if(ligatures)$
 \defaultfontfeatures+{Ligatures={Common}}
@@ -195,6 +263,12 @@ $if(CJKmainfont)$
   \ifXeTeX
     \usepackage{xeCJK}
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+    $if(CJKsansfont)$
+      \setCJKsansfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKsansfont$}
+    $endif$
+    $if(CJKmonofont)$
+      \setCJKmonofont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmonofont$}
+    $endif$
   \fi
 $endif$
 \newfontfamily\emojifont{Noto Color Emoji}[Renderer = HarfBuzz]
@@ -230,26 +304,8 @@ $if(zero-width-non-joiner)$
 \fi
 %% End of ZWNJ support
 $endif$
-$if(beamer)$
-$if(theme)$
-\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
-$endif$
-$if(colortheme)$
-\usecolortheme{$colortheme$}
-$endif$
-$if(fonttheme)$
-\usefonttheme{$fonttheme$}
-$endif$
-$if(mainfont)$
-\usefonttheme{serif} % use mainfont rather than sansfont for slide text
-$endif$
-$if(innertheme)$
-\useinnertheme{$innertheme$}
-$endif$
-$if(outertheme)$
-\useoutertheme{$outertheme$}
-$endif$
 
+$if(beamer)$
 \usepackage{changepage}
 % use rounded blocks with shadow
 \setbeamertemplate{blocks}[rounded][shadow=true]
@@ -373,6 +429,7 @@ $else$
 \makesavenoteenv{longtable}
 $endif$
 $endif$
+
 $if(graphics)$
 \usepackage[export]{adjustbox}
 \usepackage{graphicx}
@@ -400,6 +457,10 @@ $else$
 \def\fps@figure{htbp}
 \makeatother
 $endif$
+
+$if(svg)$
+\usepackage{svg}
+$endif$
 $endif$
 $if(strikeout)$
 $-- also used for underline
@@ -408,6 +469,15 @@ $-- also used for underline
   \usepackage[soul]{lua-ul}
 \else
   \usepackage{soul}
+$if(beamer)$
+  \makeatletter
+  \let\HL\hl
+  \renewcommand\hl{% fix for beamer highlighting
+    \let\set@color\beamerorig@set@color
+    \let\reset@color\beamerorig@reset@color
+    \HL}
+  \makeatother
+$endif$
 $if(CJKmainfont)$
   \ifXeTeX
     % soul's \st doesn't work for CJK:
@@ -428,20 +498,36 @@ $endif$
 $if(subfigure)$
 \usepackage{subcaption}
 $endif$
+
 $if(beamer)$
 $else$
 $if(block-headings)$
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 $endif$
 $endif$
+
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
@@ -493,6 +579,12 @@ $if(lang)$
 \fi
 $if(babel-lang)$
 \babelprovide[main,import]{$babel-lang$}
+$if(mainfont)$
+\ifPDFTeX
+\else
+\babelfont{rm}[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$$if(mainfontfallback)$,RawFeature={fallback=mainfontfallback}$endif$]{$mainfont$}
+\fi
+$endif$
 $endif$
 $for(babel-otherlangs)$
 \babelprovide[import]{$babel-otherlangs$}
@@ -562,6 +654,7 @@ $endif$
 $if(nocite-ids)$
 \nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
 $endif$
+
 $if(csl-refs)$
 % \newlength{\cslhangindent}
 % \setlength{\cslhangindent}{1.5em}
@@ -594,10 +687,12 @@ $endif$
 $if(titlehead)$
 \titlehead{$titlehead$}
 $endif$
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 $if(samelinks)$
 \urlstyle{same} % disable monospaced font for URLs
+$else$
+\urlstyle{$if(urlstyle)$$urlstyle$$else$same$endif$}
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
