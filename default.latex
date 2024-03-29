@@ -195,7 +195,11 @@ $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $endif$
 
-\ifPDFTeX\else
+\ifPDFTeX
+$if(mathpackage)$
+$mathpackage$$-- e.g., \usepackage[xcharter]{newtxmath}
+$endif$
+\else
   % xetex/luatex font selection
   $if(mainfontfallback)$
     \ifLuaTeX
@@ -224,15 +228,19 @@ $endif$
     \fi
   $endif$
   \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$if(monofontfallback)$,RawFeature={fallback=monofontfallback}$endif$]{$if(monofont)$$monofont$$else$Fira Mono$endif$}
+$if(mathpackage)$
+$mathpackage$$-- e.g., \usepackage[xcharter]{newtxmath}
+$else$
 \setmathfont{TeX Gyre Pagella Math}
 $if(mathfont)$
 \setmathfont{$mathfont$}
 $else$
 $--\setmathfont{TeX Gyre Pagella Math}
-\setmathfont[range=\mathup]  {$mainfont$}
-\setmathfont[range=\mathbfup]{$mainfont$ Bold}
-\setmathfont[range=\mathbfit]{$mainfont$ Bold Italic}
-\setmathfont[range=\mathit]  {$mainfont$ Italic}
+\setmathfont[range=\mathup]  {$if(mainfont)$$mainfont$$else$Charis SIL$endif$}
+\setmathfont[range=\mathbfup]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$ Bold}
+\setmathfont[range=\mathbfit]{$if(mainfont)$$mainfont$$else$Charis SIL$endif$ Bold Italic}
+\setmathfont[range=\mathit]  {$if(mainfont)$$mainfont$$else$Charis SIL$endif$ Italic}
+$endif$
 $endif$
 $if(ligatures)$
 \defaultfontfeatures+{Ligatures={Common}}
