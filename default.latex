@@ -254,9 +254,7 @@ $endif$
 $if(discretionary-ligatures)$
 \defaultfontfeatures+{Ligatures={Discretionary}}
 $endif$
-$if(oldstyle-numbers)$
-\defaultfontfeatures+{Numbers={OldStyle,$if(proportional-numbers)$Proportional$else$Monospaced$endif$}}
-$endif$
+\defaultfontfeatures+{Numbers={$if(oldstyle-numbers)$OldStyle$else$Lining$endif$,$if(proportional-numbers)$Proportional$else$Monospaced$endif$}}
 \newfontfamily\hebrewfont[Script=Hebrew,Contextuals=Alternate]{$if(hebrewfont)$$hebrewfont$$else$DejaVu Serif$endif$}
 \newfontfamily\greekfont[Script=Greek,Contextuals=Alternate]{$if(greekfont)$$greekfont$$else$DejaVu Serif$endif$}
 
