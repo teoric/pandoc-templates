@@ -129,14 +129,17 @@ $endif$
 \newif\ifxetexorluatex
 \ifXeTeX
   \xetexorluatextrue
+  \pdfminorversion=7
 \else
   \ifLuaTeX
     \usepackage{luatex85}
     \usepackage{lua-widow-control}
     \lwcsetup{$if(lua-widow-control-preset)$$lua-widow-control-preset$$else$balanced$endif$}
     \xetexorluatextrue
+    \directlua{pdf.setminorversion(7)}
   \else
     \xetexorluatexfalse
+    \pdfminorversion=7
   \fi
 \fi
 \ifPDFTeX
