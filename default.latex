@@ -2,7 +2,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 $if(dir)$
 $if(latex-dir-rtl)$
 \PassOptionsToPackage{RTLdocument}{bidi}
@@ -20,9 +20,9 @@ $else$
 $endif$
 $if(papersize)$
   $papersize$paper,
-$else$
+$else$$if(beamer)$$else$
   a4paper,
-$endif$
+$endif$$endif$
 $if(beamer)$
   ignorenonframetext,
 $if(handout)$
@@ -152,16 +152,17 @@ $if(mathspec)$
 $else$
   \usepackage{unicode-math} % this also loads fontspec
 $endif$
-  \defaultfontfeatures+[\ttfamily]{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
   $if(font-scale-match-upper)$
   \defaultfontfeatures{Scale=MatchUppercase}
   $else$
   \defaultfontfeatures{Scale=MatchLowercase}$-- must come before Beamer theme
   $endif$
+  \defaultfontfeatures+[\ttfamily]{Ligatures={NoCommon,NoDiscretionary,NoHistoric,NoRequired,NoContextual}}
   $if(no-contextuals)$
   $else$
   \defaultfontfeatures+{Ligatures={Contextual,NoCommon}}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  $--\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX}
   $endif$
 \fi
 $if(fontfamily)$
@@ -231,7 +232,8 @@ $endif$
 $if(mathpackage)$
 $mathpackage$$-- e.g., \usepackage[xcharter]{newtxmath}
 $else$
-\setmathfont{TeX Gyre Pagella Math}
+\setmathfont{latinmodern-math.otf}
+$--\setmathfont{TeX Gyre Pagella Math}
 $if(mathfont)$
 \setmathfont{$mathfont$}
 $else$
@@ -352,9 +354,10 @@ $if(beamer)$
 {\end{adjustwidth}\end{block}}
 
 \newenvironment{bluebox}[1]{\centering%
+
 \setbeamercolor{block title}{fg=BoxDVorderOben,bg=BoxDHinterOben}%
 \setbeamercolor{block body}{fg=BoxDVorderUnten,bg=BoxDHinterUnten}%
-\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+\begin{block}{\hypersetup{citecolor=orange}#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 $endif$
 % Use upquote if available, for straight quotes in verbatim environments
@@ -789,11 +792,11 @@ $endif$
 $endif$
 \newcommand{\rechts}[1]{\hfill\mbox{#1}}
 \newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
-\newcommand{\rechtsanm}[1]{\hfill\mbox{\usekomafont{descriptionlabel}\color{darkred}#1}}
+\newcommand{\rechtsanm}[1]{\hfill\mbox{$if(beamer)$$else$\ifcsname usekomafont\endcsname\usekomafont{descriptionlabel}\else\bfseries\fi\color{darkred}$endif$#1}}
 \ifPDFTeX
 \newcommand{\unifont}{\empty}
 \else
-\newfontfamily\unifont[Contextuals=Alternate]{Junicode}
+\newfontfamily\unifont[Contextuals=Alternate]{$if(unifont)$$unifont$$else$Junicode$endif$}
 \fi
 $if(beamer)$
 \definecolor{blueish}{rgb}{.89,.89,0.9}
@@ -839,6 +842,7 @@ $endif$
 
 $endif$
 $if(beamer)$
+\setbeamersize{text margin left=4mm, text margin right=4mm}
 $else$
 $if(quotefont)$
 \newfontfamily\quotefont{$quotefont$}[$for(quotefontoptions)$$quotefontoptions$$sep$,$endfor$]
