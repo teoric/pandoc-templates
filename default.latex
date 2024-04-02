@@ -369,6 +369,9 @@ $--  \UseMicrotypeSet[protrusion]{allmath-nott} % disable protrusion for tt font
 }{}
 $if(indent)$
 $else$
+$if(no-skip)$
+$-- \setlength{\parskip}{0pt plus 0.15\baselineskip minus 0.1\baselineskip}
+$else$
 \makeatletter
 \@ifundefined{KOMAClassName}{% if non-KOMA class
   \IfFileExists{parskip.sty}{%
@@ -379,6 +382,7 @@ $else$
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+$endif$
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
@@ -652,6 +656,9 @@ $if(biblatex)$
   sequens = {f\adddot},
   sequentes = {ff\adddot},
 }
+$if(bibname-small-caps)$
+\renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
+$endif$
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
