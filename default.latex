@@ -13,17 +13,11 @@ $if(CJKmainfont)$
 $endif$
 %
 \documentclass[
-$if(fontsize)$
-  $fontsize$,
-$else$
-  12pt,
-$endif$
-$if(papersize)$
-  $papersize$paper,
-$else$$if(beamer)$$else$
+  $if(fontsize)$$fontsize$,$else$12pt,$endif$$if(papersize)$$papersize$
+  paper,
+  $else$$if(beamer)$$else$
   a4paper,
-$endif$$endif$
-$if(beamer)$
+$endif$$endif$$if(beamer)$
   ignorenonframetext,
 $if(handout)$
   handout,
