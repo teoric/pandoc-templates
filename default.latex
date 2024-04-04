@@ -768,7 +768,16 @@ $endif$
 \subtitle{$subtitle$}
 $endif$
 $if(author)$
+$if(institute)$
+\usepackage{authblk}
+\renewcommand\Authsep{, }
+\renewcommand\Authand{, }
+\renewcommand\Authands{, }
+$for(author)$\author{$author$}$endfor$
+$for(institute)$\affil{$institute$}$endfor$
+$else$
 \author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
 $endif$
 \date{$date$
 $if(title-logo)$
