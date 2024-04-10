@@ -36,6 +36,13 @@ $endif$
 \usepackage{relsize}
 \usepackage{ragged2e}
 \usepackage{xcolor}
+
+% BF legacy colors:
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkorange}{rgb}{1,0.5,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+
 $if(beamer)$
 $if(background-image)$
 \usebackgroundtemplate{%
@@ -308,10 +315,6 @@ $if(beamer)$
 \usepackage{changepage}
 % use rounded blocks with shadow
 \setbeamertemplate{blocks}[rounded][shadow=true]
-\definecolor{darkred}{rgb}{0.6,0,0}
-\definecolor{darkgreen}{rgb}{0,0.5,0}
-\definecolor{darkorange}{rgb}{1,0.5,0}
-\definecolor{darkblue}{rgb}{0,0,0.5}
 
 \colorlet{BoxAVorderOben}{white}
 \colorlet{BoxAHinterOben}{darkgreen!80}
