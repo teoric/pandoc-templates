@@ -36,6 +36,10 @@ $endif$
 \usepackage{relsize}
 \usepackage{ragged2e}
 \usepackage{xcolor}
+$if(beamer)$
+$else$
+\usepackage{tcolorbox}
+$endif$
 
 % BF legacy colors:
 \definecolor{darkred}{rgb}{0.6,0,0}
@@ -110,9 +114,8 @@ $endif$
 $if(small-spacing)$
 \usepackage{small-spacing}
 $endif$
-$if(linestretch)$
 \usepackage{setspace}
-\usepackage{small-spacing}
+$if(linestretch)$
 \usepackage{enumitem}
 \setlist[itemize]{parsep=0pt, itemsep=0pt, topsep=0pt}
 \setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt}
