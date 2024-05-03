@@ -810,9 +810,9 @@ $if(logo)$
 \logo{\includegraphics{$logo$}}
 $endif$
 $endif$
-\newcommand{\rechts}[1]{\hfill\mbox{#1}}
-\newcommand{\rechtszitat}[1]{\hfill\mbox{\normalfont{}#1}}
-\newcommand{\rechtsanm}[1]{\hfill\mbox{$if(beamer)$$else$\ifcsname usekomafont\endcsname\usekomafont{descriptionlabel}\else\bfseries\fi\color{darkred}$endif$#1}}
+\newcommand{\rechts}[1]{\strut\hfill\mbox{#1}}
+\newcommand{\rechtszitat}[1]{\strut\hfill\mbox{\normalfont{}#1}}
+\newcommand{\rechtsanm}[1]{\strut\hfill\mbox{$if(beamer)$$else$\ifcsname usekomafont\endcsname\usekomafont{descriptionlabel}\else\bfseries\fi\color{darkred}$endif$#1}}
 \ifPDFTeX
 \newcommand{\unifont}{\empty}
 \else
