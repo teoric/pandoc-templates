@@ -871,10 +871,11 @@ $endif$
 $endif$
 
 \usepackage{newunicodechar}
-\newunicodechar{ȥ}{\expandafter\iffontchar\font`ȥ\relax{}ȥ\else{}\iffontchar\font`ʒ\relax{}ʒ\else{}z\fi\fi}
-\newunicodechar{Ȥ}{\expandafter\iffontchar\font`Ȥ\relax{}Ȥ\else{}\iffontchar\font`Ʒ\relax{}Ʒ\else{}Z\fi\fi}
-\newunicodechar{ʒ}{\expandafter\iffontchar\font`ʒ\else{}ʒ\relax{}z\fi}
-\newunicodechar{Ʒ}{\expandafter\iffontchar\font`Ʒ\else{}Ʒ\relax{}Z\fi}
+\newunicodechar{ȥ}{\iffontchar\font`ȥ\relax{}ȥ\else{}\iffontchar\font`ʒ\relax{}ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi\fi}
+\newunicodechar{Ȥ}{\iffontchar\font`Ȥ\relax{}Ȥ\else{}\iffontchar\font`Ʒ\relax{}Ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}Z̦\else{}Z\fi\fi\fi\fi}
+\newunicodechar{ʒ}{\iffontchar\font`ʒ\else{}ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
+\newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
+
 
 \begin{document}\sloppy
 
