@@ -34,6 +34,21 @@ $if(beamer)$
 \usepackage{hyperxmp}
 $endif$
 \usepackage{relsize}
+$if(has-poetry)$
+% \usepackage{verse}
+% \poemlines{5}
+% \verselinenumbersleft
+% % \setlength{\vrightskip}{-3em}
+% \setlength{\vleftskip}{-3em}
+\usepackage{poetry}
+\poemlinenumstrue
+\setcounter{poemlinenumsevery}{5}
+\poemlinenumstrue
+\AtBeginEnvironment{poem}{\parskip=0pt}
+\setlength{\poemindent}{\poemlinenumboxgap}
+\setlength{\poemindent}{\poemlinenumboxgap}
+\addtolength{\poemindent}{\poemlinenumboxwd}
+$endif$
 \usepackage{ragged2e}
 \usepackage{xcolor}
 $if(beamer)$
