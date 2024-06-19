@@ -30,6 +30,8 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$if(documentclass)$$documentclass$$else$scrartcl$endif$}
+\usepackage{etoolbox}
+\usepackage{multicol}
 $if(beamer)$
 \usepackage{hyperxmp}
 $endif$
@@ -48,6 +50,9 @@ $if(has-poetry)$
 \setlength{\poemindent}{\poemlinenumboxgap}
 \setlength{\poemindent}{\poemlinenumboxgap}
 \addtolength{\poemindent}{\poemlinenumboxwd}
+\usepackage[para]{footmisc}
+\pagestyle{empty}
+\patchcmd{\makefootnoteparagraph}{\columnwidth}{\textwidth} {\typeout{Success}}{\typeout{patch failed}}
 $endif$
 \usepackage{ragged2e}
 \usepackage{xcolor}
@@ -447,7 +452,6 @@ $if(beamer)$
 \makeatother
 $else$
 % Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
 \makeatletter
 \patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
 \makeatother
