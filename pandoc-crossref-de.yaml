@@ -1,0 +1,10 @@
+figureTitle: "Abb."
+tableTitle: "Tab."
+figPrefix: "Abb."
+eqnPrefix: "Gl."
+tblPrefix: "Tab."
+lstPrefix: "Code"
+secPrefix: Abschnitt 
+loftitle: "# Abbildungsverzeichnis"
+lotTitle: "# Tabellenverzeichnis"
+lolTitle: "# Verzeichnis der Programmcode-Blöcke"
