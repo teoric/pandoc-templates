@@ -50,18 +50,19 @@ $if(has-poetry)$
 \bigskip\noindent}
 % patch title and author
 \makeatletter
-\def\titleauthorpoem#1#2{%
+\renewcommand*{\titleauthorpoem}[3][]{%
 \advance\poem@poemno by1\stepcounter{poemno}%
 \advance\poem@abspoemno by1\stepcounter{abspoemno}%
-\def\thepoemtitle{#1}\def\thepoemauthor{#2}%
+\def\thepoemtitle{#2}\def\thepoemauthor{#3}%
 \begingroup%
+\def\tmp{#1}%
 \poemauthorprehook%
-\poemauthorstyle #2%
+\poemauthorstyle\ifx\tmp\empty\else\tmp{} \fi #3%
 \poemauthorposthook%
 \endgroup%
 \begingroup%
 \poemtitleprehook%
-\poemtitlestyle #1%
+\poemtitlestyle #2%
 \poemtitleposthook%
 \endgroup%
 }%
@@ -861,9 +862,13 @@ $endif$
 \ifPDFTeX
 \newcommand{\unifont}{\empty}
 \else
-\newfontfamily\unifont[Contextuals=Alternate]{$if(unifont)$$unifont$$else$Junicode$endif$}
+\newfontfamily\unifont[Contextuals=Alternate]{$if(unifont)$$unifont$$else$Junicode VF$endif$}
+\newfontfamily{\ligfont}[Ligatures={Required, Common, Contextual, Rare, Historic}]{$if(ligfont)$$ligfont$$else$$if(unifont)$$unifont$$else$Junicode VF$endif$$endif$}
 \fi
 $if(beamer)$
+\newcommand{\unitext}[1]{{\unifont{#1}}}
+\newrobustcmd*{\unemph}[1]{\textcolor{blue}{#1}}
+\newcommand{\ligtext}[1]{{\ligfont{#1}}}
 \definecolor{blueish}{rgb}{.89,.89,0.9}
 \preto\columns{\medskip}
 \setbeamertemplate{blocks}[rounded][shadow=true]
@@ -921,6 +926,9 @@ $endif$
 \newunicodechar{ʒ}{\iffontchar\font`ʒ\else{}ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 
+\ifcsname theHtable\endcsname\else
+\newcommand{\theHtable}{\thetable}
+\fi
 
 \begin{document}\sloppy
 
