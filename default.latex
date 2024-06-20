@@ -46,6 +46,32 @@ $if(has-poetry)$
 \poemlinenumstrue
 \setcounter{poemlinenumsevery}{5}
 \poemlinenumstrue
+\def\poemtitleprehook{%
+\bigskip\noindent}
+% patch title and author
+\makeatletter
+\def\titleauthorpoem#1#2{%
+\advance\poem@poemno by1\stepcounter{poemno}%
+\advance\poem@abspoemno by1\stepcounter{abspoemno}%
+\def\thepoemtitle{#1}\def\thepoemauthor{#2}%
+\begingroup%
+\poemauthorprehook%
+\poemauthorstyle #2%
+\poemauthorposthook%
+\endgroup%
+\begingroup%
+\poemtitleprehook%
+\poemtitlestyle #1%
+\poemtitleposthook%
+\endgroup%
+}%
+\makeatother
+% end patch
+\def\poemtitleposthook{}
+\def\poemauthorprehook{\bigskip}
+\def\poemauthorposthook{: }
+\def\poemtitlestyle{\normalfont\normalsize\itshape}
+\def\poemauthorstyle{\normalfont\normalsize}
 \AtBeginEnvironment{poem}{\parskip=0pt}
 \setlength{\poemindent}{\poemlinenumboxgap}
 \setlength{\poemindent}{\poemlinenumboxgap}
