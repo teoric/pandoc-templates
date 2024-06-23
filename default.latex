@@ -77,7 +77,8 @@ $if(has-poetry)$
 \setlength{\poemindent}{\poemlinenumboxgap}
 \setlength{\poemindent}{\poemlinenumboxgap}
 \addtolength{\poemindent}{\poemlinenumboxwd}
-\usepackage[para]{footmisc}
+% \usepackage[para]{footmisc}
+\deffootnote[2em]{2em}{2em}{{{\thefootnotemark}.~~}\setlength\parindent{1em}}
 \pagestyle{empty}
 \patchcmd{\makefootnoteparagraph}{\columnwidth}{\textwidth} {\typeout{Success}}{\typeout{patch failed}}
 $endif$
