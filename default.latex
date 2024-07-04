@@ -224,7 +224,11 @@ $endif$
 $if(fontfamily)$
 $else$
 $-- Set default font before Beamer theme so the theme can override it
+$if(mainfont)$
+$-- omit also if mainfont set
+$else$
 \usepackage{lmodern}
+$endif$
 $endif$
 $-- Set Beamer theme before user font settings so they can override theme
 $if(beamer)$
