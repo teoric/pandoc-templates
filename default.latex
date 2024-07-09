@@ -36,13 +36,17 @@ $if(beamer)$
 \usepackage{hyperxmp}
 $endif$
 \usepackage{relsize}
+\newcommand{\rechts}[1]{\strut\hfill\mbox{#1}}
+\newcommand{\rechtszitat}[1]{\strut\hfill\mbox{\normalfont{}#1}}
+\newcommand{\rechtsanm}[1]{\strut\hfill\mbox{$if(beamer)$$else$\ifcsname usekomafont\endcsname\usekomafont{descriptionlabel}\else\bfseries\fi\color{darkred}$endif$#1}}
 $if(has-poetry)$
 % \usepackage{verse}
 % \poemlines{5}
 % \verselinenumbersleft
 % % \setlength{\vrightskip}{-3em}
 % \setlength{\vleftskip}{-3em}
-\usepackage{poetry}
+\usepackage{poetry-bfi}
+\usepackage{vocabnote}
 \poemlinenumstrue
 \setcounter{poemlinenumsevery}{5}
 \poemlinenumstrue
@@ -78,7 +82,7 @@ $if(has-poetry)$
 \setlength{\poemindent}{\poemlinenumboxgap}
 \addtolength{\poemindent}{\poemlinenumboxwd}
 % \usepackage[para]{footmisc}
-\deffootnote[2em]{2em}{2em}{{{\thefootnotemark}.~~}\setlength\parindent{1em}}
+% \deffootnote[2em]{2em}{2em}{{{\thefootnotemark}.~~}\setlength\parindent{1em}}
 \pagestyle{empty}
 \patchcmd{\makefootnoteparagraph}{\columnwidth}{\textwidth} {\typeout{Success}}{\typeout{patch failed}}
 $endif$
@@ -861,9 +865,6 @@ $if(logo)$
 \logo{\includegraphics{$logo$}}
 $endif$
 $endif$
-\newcommand{\rechts}[1]{\strut\hfill\mbox{#1}}
-\newcommand{\rechtszitat}[1]{\strut\hfill\mbox{\normalfont{}#1}}
-\newcommand{\rechtsanm}[1]{\strut\hfill\mbox{$if(beamer)$$else$\ifcsname usekomafont\endcsname\usekomafont{descriptionlabel}\else\bfseries\fi\color{darkred}$endif$#1}}
 \ifPDFTeX
 \newcommand{\unifont}{\empty}
 \else
