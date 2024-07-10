@@ -50,6 +50,7 @@ $if(has-poetry)$
 \poemlinenumstrue
 \setcounter{poemlinenumsevery}{5}
 \usepackage[modulo]{lineno}
+\renewcommand\linenumberfont{\normalfont\small}
 \poemlinenumstrue
 \def\poemtitleprehook{%
 \bigskip\noindent}
