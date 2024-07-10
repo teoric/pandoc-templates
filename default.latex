@@ -49,6 +49,7 @@ $if(has-poetry)$
 \usepackage{vocabnote}
 \poemlinenumstrue
 \setcounter{poemlinenumsevery}{5}
+\usepackage[modulo]{lineno}
 \poemlinenumstrue
 \def\poemtitleprehook{%
 \bigskip\noindent}
