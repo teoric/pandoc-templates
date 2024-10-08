@@ -30,6 +30,7 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$if(documentclass)$$documentclass$$else$scrartcl$endif$}
+\newcommand{\pandocbounded}[1]{#1}
 \usepackage{etoolbox}
 \usepackage{multicol}
 $if(beamer)$
