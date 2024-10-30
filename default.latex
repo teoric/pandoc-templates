@@ -396,26 +396,25 @@ $if(beamer)$
 \colorlet{BoxDHinterUnten}{blue!20}
 
 % define Boxes:
-\newenvironment{goodbox}[1]{\centering%
+\newenvironment<>{goodbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxAVorderOben,bg=BoxAHinterOben}%
 \setbeamercolor{block body}{fg=BoxAVorderUnten,bg=BoxAHinterUnten}%
 \begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
-\newenvironment{acceptbox}[1]{\centering%
+\newenvironment<>{acceptbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxBVorderOben,bg=BoxBHinterOben}%
 \setbeamercolor{block body}{fg=BoxBVorderUnten,bg=BoxBHinterUnten}%
 \begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
-\newenvironment{badbox}[1]{\centering%
+\newenvironment<>{badbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxCVorderOben,bg=BoxCHinterOben}%
 \setbeamercolor{block body}{fg=BoxCVorderUnten,bg=BoxCHinterUnten}%
 \begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
-\newenvironment{bluebox}[1]{\centering%
-
+\newenvironment<>{bluebox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxDVorderOben,bg=BoxDHinterOben}%
 \setbeamercolor{block body}{fg=BoxDVorderUnten,bg=BoxDHinterUnten}%
 \begin{block}{\hypersetup{citecolor=orange}#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
