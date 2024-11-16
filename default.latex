@@ -234,7 +234,10 @@ $-- Set default font before Beamer theme so the theme can override it
 $if(mainfont)$
 $-- omit also if mainfont set
 $else$
+$if(beamer)$$-- load only for non-beamer
+$else$
 \usepackage{lmodern}
+$endif$
 $endif$
 $endif$
 $-- Set Beamer theme before user font settings so they can override theme
@@ -394,6 +397,9 @@ $if(beamer)$
 \colorlet{BoxDHinterOben}{darkblue!80}
 \colorlet{BoxDVorderUnten}{black}
 \colorlet{BoxDHinterUnten}{blue!20}
+
+\AtBeginEnvironment{quotation}{\medskip}
+\AtBeginEnvironment{quote}{\medskip}
 
 % define Boxes:
 \newenvironment<>{goodbox}[1]{\centering%
@@ -703,7 +709,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$,$else$style=authoryear-icomp,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$,$else$style=authoryear,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
