@@ -405,25 +405,25 @@ $if(beamer)$
 \newenvironment<>{goodbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxAVorderOben,bg=BoxAHinterOben}%
 \setbeamercolor{block body}{fg=BoxAVorderUnten,bg=BoxAHinterUnten}%
-\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+\begin{block}#2{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
 \newenvironment<>{acceptbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxBVorderOben,bg=BoxBHinterOben}%
 \setbeamercolor{block body}{fg=BoxBVorderUnten,bg=BoxBHinterUnten}%
-\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+\begin{block}#2{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
 \newenvironment<>{badbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxCVorderOben,bg=BoxCHinterOben}%
 \setbeamercolor{block body}{fg=BoxCVorderUnten,bg=BoxCHinterUnten}%
-\begin{block}{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+\begin{block}#2{#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 
 \newenvironment<>{bluebox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxDVorderOben,bg=BoxDHinterOben}%
 \setbeamercolor{block body}{fg=BoxDVorderUnten,bg=BoxDHinterUnten}%
-\begin{block}{\hypersetup{citecolor=orange}#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
+\begin{block}#2{\hypersetup{citecolor=orange}#1}\begin{adjustwidth}{0.1ex}{0.1ex}}
 {\end{adjustwidth}\end{block}}
 $endif$
 % Use upquote if available, for straight quotes in verbatim environments
@@ -939,6 +939,8 @@ $endif$
 \newunicodechar{Ȥ}{\iffontchar\font`Ȥ\relax{}Ȥ\else{}\iffontchar\font`Ʒ\relax{}Ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}Z̦\else{}Z\fi\fi\fi\fi}
 \newunicodechar{ʒ}{\iffontchar\font`ʒʒ\relax{}\else\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
+\newunicodechar{⟨}{\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi}
+\newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
 
 \ifcsname theHtable\endcsname\else
 \newcommand{\theHtable}{\thetable}
