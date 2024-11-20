@@ -27,16 +27,16 @@ $if(lang)$
 .\" use lang.tmac for language settings (currently only for en, de, fr)
 .mso $lang$.tmac
 .ds PH "NIX" \" to allow trans.tmac to function
-.mso trans.tmac \" apply translations from lang.tmac
+.mso trans.tmac\" apply translations from lang.tmac
 .\" tm $lang$ \*[\*[locale]-lifg] \*[Lifg]
 $endif$
 $else$
 .nh \" Turn off hyphenation by default.
 $endif$
-.nr FROM_PANDOC 1          \" used to controll image placement in anypic
-.nr SCALE_TO_LL 1          \" avoid image hanging over page margins
-.mso anypic.tmac           \" macro for pictures
-.mso s-heading-space.tmac  \" different spacing for headings in groff ms
+.nr FROM_PANDOC 1\"           used to controll image placement in anypic
+.nr SCALE_TO_LL 1\"           avoid image hanging over page margins
+.mso anypic.tmac\"            macro for pictures
+.mso s-heading-space.tmac\"   different spacing for headings in groff ms
 .\" **** Settings *************************************************
 .\" left margin
 .nr PO 2.5cm
