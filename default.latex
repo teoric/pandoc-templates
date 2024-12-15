@@ -836,6 +836,8 @@ $if(subsubtitle)$
 $endif$
 \subtitle{$subtitle$}
 $endif$
+$if(beamer)$
+$else$
 $if(author)$
 $if(institute)$
 \usepackage{authblk}
@@ -848,6 +850,7 @@ $else$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
 $endif$
+$endif$
 \date{$date$
 $if(title-logo)$
 \\[5em]
@@ -855,6 +858,9 @@ $if(title-logo)$
 \hbox{\hspace{.6\textwidth}\includegraphics[scale=1]{$title-logo$}}
 $endif$}
 $if(beamer)$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
 $if(institute)$
 \institute{$for(institute)$$institute$$sep$ \and $endfor$}
 $endif$
