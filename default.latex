@@ -188,7 +188,7 @@ $endif$
 \newif\ifxetexorluatex
 \ifXeTeX
   \xetexorluatextrue
-  \pdfminorversion=7
+  % \pdfminorversion=7
 \else
   \ifLuaTeX
     \usepackage{luatex85}
@@ -722,6 +722,9 @@ $if(biblatex)$
   sequens = {f\adddot},
   sequentes = {ff\adddot},
 }
+$for(biblatex-includes)$
+$biblatex-includes$
+$endfor$
 $if(bibname-small-caps)$
 \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
 $endif$
@@ -940,13 +943,14 @@ $if(quotefont)$
 $endif$
 $endif$
 
+\newfontfamily\symbolsfont{Noto Sans Symbols2}[Renderer = HarfBuzz]
 \usepackage{newunicodechar}
 \newunicodechar{ȥ}{\iffontchar\font`ȥ\relax{}ȥ\else{}\iffontchar\font`ʒ\relax{}ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi\fi}
 \newunicodechar{Ȥ}{\iffontchar\font`Ȥ\relax{}Ȥ\else{}\iffontchar\font`Ʒ\relax{}Ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}Z̦\else{}Z\fi\fi\fi\fi}
 \newunicodechar{ʒ}{\iffontchar\font`ʒʒ\relax{}\else\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{⟨}{\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi}
-\newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
+\newunicodechar{🮰}{\iffontchar\font`🮰\relax{}🮰\else{}{\symbolsfont{}🮰}{}\fi}
 
 \ifcsname theHtable\endcsname\else
 \newcommand{\theHtable}{\thetable}
