@@ -888,8 +888,8 @@ $endif$
 \newfontfamily\unifont[Contextuals=Alternate]{$if(unifont)$$unifont$$else$Junicode VF$endif$}
 \newfontfamily{\ligfont}[Ligatures={Required, Common, Contextual, Rare, Historic}]{$if(ligfont)$$ligfont$$else$$if(unifont)$$unifont$$else$Junicode VF$endif$$endif$}
 \fi
-$if(beamer)$
 \newcommand{\unitext}[1]{{\unifont{#1}}}
+$if(beamer)$
 \newrobustcmd*{\unemph}[1]{\textcolor{blue}{#1}}
 \newcommand{\ligtext}[1]{{\ligfont{#1}}}
 \definecolor{blueish}{rgb}{.89,.89,0.9}
