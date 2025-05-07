@@ -401,6 +401,7 @@ $if(beamer)$
 \AtBeginEnvironment{quotation}{\medskip}
 \AtBeginEnvironment{quote}{\medskip}
 
+\newenvironment{anm}{\par\vskip1ex\begingroup\begin{sf}\begin{small}}{\end{small}\end{sf}\endgroup{}\vskip1ex}
 % define Boxes:
 \newenvironment<>{goodbox}[1]{\centering%
 \setbeamercolor{block title}{fg=BoxAVorderOben,bg=BoxAHinterOben}%
