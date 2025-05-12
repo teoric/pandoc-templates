@@ -710,7 +710,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$,$else$style=authoryear,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=authoryear$endif$$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
@@ -728,6 +728,17 @@ $biblatex-includes$
 $endfor$
 $if(bibname-small-caps)$
 \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
+$endif$
+$if(suppress-biblio-title)$\defbibheading{bibliography}{}$endif$
+$if(keep-bib-month)$
+$else$
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+$endif$
+$if(keep-bib-day)$
+$else$
+\AtEveryBibitem{\clearfield{day}}
+\AtEveryCitekey{\clearfield{day}}
 $endif$
 $for(bibliography)$
 \addbibresource{$bibliography$}
@@ -1047,9 +1058,8 @@ $if(beamer)$
   \printbibliography[heading=none]
 \end{frame}
 $else$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+\printbibliography$if(biblio-title)$[$if(suppress-biblio-title)$heading=none$else$title=$biblio-title$$endif$]$endif$
 $endif$
-
 $endif$
 $for(include-after)$
 $include-after$
