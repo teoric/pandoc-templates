@@ -102,6 +102,19 @@ $endif$
 .\".ds CF %
 .\".ds CH
 .ds CF %
+$if(adjusting)$
+.ad $adjusting$
+$endif$
+$if(has-inline-math)$
+.EQ
+delim @@
+.EN
+$endif$
+$if(pdf-engine)$
+.\" color for links (rgb)
+.ds PDFHREF.COLOUR   0.35 0.00 0.60
+.\" border for links (default none)
+.ds PDFHREF.BORDER   0 0 0
 .\" pdf outline fold level
 .nr PDFOUTLINE.FOLDLEVEL 3
 .\" start out in outline view
@@ -112,13 +125,6 @@ $endif$
 $if(subject)$
 .pdfinfo /Subject "$subject$"
 $endif$
-$if(adjusting)$
-.ad $adjusting$
-$endif$
-$if(has-inline-math)$
-.EQ
-delim @@
-.EN
 $endif$
 $for(header-includes)$
 $header-includes$
