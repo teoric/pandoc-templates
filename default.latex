@@ -13,11 +13,22 @@ $if(CJKmainfont)$
 $endif$
 %
 \documentclass[
-  $if(fontsize)$$fontsize$,$else$12pt,$endif$$if(papersize)$$papersize$
-  paper,
-  $else$$if(beamer)$$else$
-  a4paper,
-$endif$$endif$$if(beamer)$
+$for(babel-otherlangs)$
+  $babel-otherlangs$,
+$endfor$
+$if(babel-lang)$
+  $babel-lang$,
+$endif$
+$if(fontsize)$
+  $fontsize$,
+$else$
+  12pt,
+$endif$
+$if(papersize)$
+  $papersize$paper,
+$else$$if(beamer)$$else$a4paper,$endif$
+$endif$
+$if(beamer)$
   ignorenonframetext,
 $if(handout)$
   handout,
@@ -30,7 +41,6 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$if(documentclass)$$documentclass$$else$scrartcl$endif$}
-\newcommand{\pandocbounded}[1]{#1}
 \usepackage{etoolbox}
 \usepackage{multicol}
 $if(beamer)$
@@ -435,6 +445,9 @@ $--  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts %
   \UseMicrotypeSet[protrusion]{allmath} % disable protrusion for tt fonts $-- temporarily try if this leads to problems
 $--  \UseMicrotypeSet[protrusion]{allmath-nott} % disable protrusion for tt fonts (and, unfortunately, custom families)
 }{}
+$--
+$-- paragraph formatting
+$--
 $if(indent)$
 $else$
 $if(no-skip)$
@@ -483,8 +496,11 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
+$--
+$-- tables
+$--
 $if(tables)$
-\usepackage{longtable,booktabs,array,calc}
+\usepackage{longtable,booktabs,array}
 $if(multirow)$
 \usepackage{multirow}
 $endif$
@@ -497,20 +513,33 @@ $if(beamer)$
 \makeatother
 $else$
 % Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
 \makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+% \patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
 \makeatother
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
 $endif$
 $endif$
-
+$--
+$-- graphics
+$--
 $if(graphics)$
 \usepackage[export]{adjustbox}
 \usepackage{graphicx}
 \usepackage{grffile}
 \makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
@@ -538,6 +567,9 @@ $if(svg)$
 \usepackage{svg}
 $endif$
 $endif$
+$--
+$-- strikeout/underline
+$--
 $if(strikeout)$
 $-- also used for underline
 \ifLuaTeX
@@ -566,6 +598,9 @@ $endif$
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$--
+$-- section numbering
+$--
 $if(numbersections)$
 \setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
 $else$
@@ -612,6 +647,9 @@ $endif$
     tex.enableprimitives("luatex",tex.extraprimitives("luatex"))
   }
   \fi
+$--
+$-- CSL citations
+$--
 $if(csl-refs)$
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
@@ -647,11 +685,14 @@ $if(csl-refs)$
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
+$--
+$-- Babel language support
+$--
 $if(lang)$
 \ifLuaTeX
-\usepackage[bidi=basic]{babel}
+\usepackage[bidi=basic,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \else
-\usepackage[bidi=default]{babel}
+\usepackage[bidi=default,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \fi
 $if(babel-lang)$
 \babelprovide[main,import]{$babel-lang$}
@@ -676,16 +717,17 @@ $endfor$
 $for(babelfonts/pairs)$
 \babelfont[$babelfonts.key$]{rm}{$babelfonts.value$}
 $endfor$
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
+%% Not necessary anymore? (2025-05-16)
+%% % get rid of language-specific shorthands (see #6817):
+%% \let\LanguageShortHands\languageshorthands
+%% \def\languageshorthands#1{}
 $endif$
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 $for(header-includes)$
 $header-includes$
 $endfor$
 \ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
+  \usepackage{selnolig} % disable illegal ligatures
   \addfontfeature{Renderer=Harfbuzz}
 \fi
 $if(dir)$
@@ -705,6 +747,9 @@ $if(dir)$
   \newenvironment{LTR}{\beginL}{\endL}
 \fi
 $endif$
+$--
+$-- bibliography support support for natbib and biblatex
+$--
 $if(natbib)$
 \usepackage[$natbiboptions$]{natbib}
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
@@ -776,7 +821,12 @@ $if(csl-refs)$
 %   {\par}
 % %/ old version
 $endif$
-\usepackage[autostyle=true]{csquotes}
+$--
+$-- csquotes
+$--
+$if(csquotes)$
+\usepackage[$if(csquotesoptions)$$for(csquotesoptions)$$csquotesoptions$$sep$,$endfor$$else$autostyle=true$endif$]{csquotes}
+$endif$
 $if(titlehead)$
 \titlehead{$titlehead$}
 $endif$
