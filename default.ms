@@ -26,8 +26,10 @@ $if(hyphenate)$
 $if(lang)$
 .\" use lang.tmac for language settings (currently only for en, de, fr)
 .mso $lang$.tmac
+.if !'$lang$'en' \{
 .ds PH "NIX" \" to allow trans.tmac to function
 .mso trans.tmac\" apply translations from lang.tmac
+.\}
 .\" tm $lang$ \*[\*[locale]-lifg] \*[Lifg]
 $endif$
 $else$
@@ -101,7 +103,6 @@ $endif$
 .rm CH
 .\".ds CF %
 .\".ds CH
-.ds CF %
 $if(adjusting)$
 .ad $adjusting$
 $endif$
