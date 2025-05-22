@@ -3,7 +3,7 @@ html {
 $if(mainfont)$
   font-family: $mainfont$;
 $endif$
-font-variant-numeric: $if(oldstyle-numbers)$oldstyle-nums$else$lining-nums$endif$ $if(proportional-numbers)$proportional-nums$else$tabular-nums$endif$ $if(stacked-fractions)$stacked-fractions$else$diagonal-fractions$endif$;
+font-variant-numeric: $if(oldstyle-numbers)$oldstyle-nums$else$lining-nums$endif$ $if(proportional-numbers)$proportional-nums$else$tabular-nums$endif$$if(stacked-fractions)$ stacked-fractions$endif$$if(diagonal-fractions)$ diagonal-fractions$endif$;
 $if(fontsize)$
   font-size: $fontsize$;
 $endif$
