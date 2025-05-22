@@ -1013,6 +1013,8 @@ $endif$
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{⟨}{\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi}
 \newunicodechar{🮰}{\iffontchar\font`🮰\relax{}🮰\else{}{\symbolsfont{}🮰}{}\fi}
+\newunicodechar{⇓}{\iffontchar\font"21D1\relax{}⇑\else{}$$\\Uparrow$${}\fi}
+\newunicodechar{⇓}{\iffontchar\font"21D3\relax{}⇓\else{}$$\\Downarrow$${}\fi}
 
 \ifcsname theHtable\endcsname\else
 \newcommand{\theHtable}{\thetable}
