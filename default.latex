@@ -24,10 +24,7 @@ $if(fontsize)$
 $else$
   12pt,
 $endif$
-$if(papersize)$
-  $papersize$paper,
-$else$$if(beamer)$$else$a4paper,$endif$
-$endif$
+$if(papersize)$$papersize$paper,$else$$if(beamer)$%$else$a4paper,$endif$$endif$
 $if(beamer)$
   ignorenonframetext,
 $if(handout)$
@@ -755,7 +752,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=authoryear$endif$$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=authoryear$endif$,$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
