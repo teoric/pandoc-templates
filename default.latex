@@ -24,7 +24,7 @@ $if(fontsize)$
 $else$
   12pt,
 $endif$
-$if(papersize)$$papersize$paper,$else$$if(beamer)$%$else$a4paper,$endif$$endif$
+$if(papersize)$$papersize$paper,$else$$if(beamer)$%$else$a4paper,$endif$$endif$$if(landscape)$landscape,$endif$
 $if(beamer)$
   ignorenonframetext,
 $if(handout)$
@@ -1002,6 +1002,7 @@ $if(quotefont)$
 $endif$
 $endif$
 
+\ifxetexorluatex
 \newfontfamily\symbolsfont{Noto Sans Symbols2}[Renderer = HarfBuzz]
 \usepackage{newunicodechar}
 \newunicodechar{ȥ}{\iffontchar\font`ȥ\relax{}ȥ\else{}\iffontchar\font`ʒ\relax{}ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi\fi}
@@ -1012,6 +1013,7 @@ $endif$
 \newunicodechar{🮰}{\iffontchar\font`🮰\relax{}\else{}{\symbolsfont{}🮰}{}\fi}
 \newunicodechar{⇓}{\iffontchar\font"21D1\relax{}\else{}$$\\Uparrow$${}\fi}
 \newunicodechar{⇓}{\iffontchar\font"21D3\relax{}\else{}$$\\Downarrow$${}\fi}
+\fi
 
 \ifcsname theHtable\endcsname\else
 \newcommand{\theHtable}{\thetable}
