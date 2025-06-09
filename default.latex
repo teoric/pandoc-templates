@@ -177,6 +177,12 @@ $if(small-spacing)$
 \usepackage{small-spacing}
 $endif$
 \usepackage{setspace}
+$if(compact-lists)$
+\usepackage{enumitem}
+\setlist[itemize]{parsep=0pt, itemsep=0pt, topsep=0pt, partopsep=0pt, leftmargin=1em}
+\setlist[enumerate]{parsep=0pt, itemsep=0pt, topsep=0pt, partopsep=0pt, leftmargin=1em}
+\setlist[description]{parsep=0pt, itemsep=0pt, topsep=0pt, partopsep=0pt, leftmargin=1em}
+$endif$
 $if(linestretch)$
 \usepackage{enumitem}
 \setlist[itemize]{parsep=0pt, itemsep=0pt, topsep=0pt}
@@ -772,6 +778,10 @@ $if(bibname-small-caps)$
 \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
 $endif$
 $if(suppress-biblio-title)$\defbibheading{bibliography}{}$endif$
+$if(keep-pagetotal)$
+$else$
+\AtEveryBibitem{\clearfield{pagetotal}}
+$endif$
 $if(keep-bib-month)$
 $else$
 \AtEveryBibitem{\clearfield{month}}
