@@ -101,6 +101,7 @@ $endif$
 $if(beamer)$
 $else$
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 $endif$
 
 % BF legacy colors:
