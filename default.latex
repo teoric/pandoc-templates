@@ -759,7 +759,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=authoryear$endif$,$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
+\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=$if(beamer)$ext-authortitle-comp,autocite=inline$else$ext-authoryear$endif$$endif$,$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
