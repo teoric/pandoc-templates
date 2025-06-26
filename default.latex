@@ -82,7 +82,7 @@ $if(has-poetry)$
 }%
 \makeatother
 % end patch
-\def\poemtitleposthook{}
+\def\poemtitleposthook{\bigskip}
 \def\poemauthorprehook{\bigskip}
 \def\poemauthorposthook{: }
 \def\poemtitlestyle{\normalfont\normalsize\itshape}
