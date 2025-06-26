@@ -55,7 +55,7 @@ $if(has-poetry)$
 % \setlength{\vleftskip}{-3em}
 \usepackage{poetry-bfi}
 \usepackage{vocabnote}
-\poemlinenumstrue
+% \poemlinenumstrue
 \setcounter{poemlinenumsevery}{5}
 \usepackage[modulo]{lineno}
 \renewcommand\linenumberfont{\normalfont\small}
@@ -777,7 +777,7 @@ $else$
 % print DOI as URL:
 \DeclareFieldFormat{doi}{%
   \url{https://doi.org/#1}}
-$fi$
+$endif$
 $if(both-doi-and-url)$
 $else$
 % DOI only if no URL:
