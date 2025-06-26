@@ -772,6 +772,28 @@ $if(biblatex)$
   sequens = {f\adddot},
   sequentes = {ff\adddot},
 }
+$if(short-dois)$
+$else$
+% print DOI as URL:
+\DeclareFieldFormat{doi}{%
+  \url{https://doi.org/#1}}
+$fi$
+$if(both-doi-and-url)$
+$else$
+% DOI only if no URL:
+% vgl. https://tex.stackexchange.com/questions/424774/print-url-only-if-doi-not-present
+\renewbibmacro*{doi+eprint+url}{%
+    \printfield{doi}%
+    \newunit\newblock%
+    \iftoggle{bbx:eprint}{%
+        \usebibmacro{eprint}%
+    }{}%
+    \newunit\newblock%
+    \iffieldundef{doi}{%
+        \usebibmacro{url+urldate}}%
+        {}%
+    }
+$endif$
 $for(biblatex-includes)$
 $biblatex-includes$
 $endfor$
