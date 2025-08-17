@@ -78,15 +78,18 @@ $if(has-poetry)$
 }%
 \makeatother
 % end patch
+$if(big-poem-title-skip)$
 \def\poemtitleposthook{\bigskip}
+$endif$
 \def\poemauthorprehook{\bigskip}
 \def\poemauthorposthook{: }
 \def\poemtitlestyle{\normalfont\normalsize\itshape}
 \def\poemauthorstyle{\normalfont\normalsize}
 \AtBeginEnvironment{poem}{\parskip=0pt}
-\setlength{\poemindent}{\poemlinenumboxgap}
+\setlength{\poemlinenumboxwd}{2em}
 \setlength{\poemindent}{\poemlinenumboxgap}
 \addtolength{\poemindent}{\poemlinenumboxwd}
+\addtolength{\poemmaxlinewd}{-\poemindent}
 % \usepackage[para]{footmisc}
 % \deffootnote[2em]{2em}{2em}{{{\thefootnotemark}.~~}\setlength\parindent{1em}}
 \pagestyle{empty}
