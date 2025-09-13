@@ -819,10 +819,6 @@ $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
 $endif$
-$if(nocite-ids)$
-\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
-$endif$
-
 $if(csl-refs)$
 % \newlength{\cslhangindent}
 % \setlength{\cslhangindent}{1.5em}
@@ -949,7 +945,6 @@ $endif$
 \date{$date$
 $if(title-logo)$
 \\[5em]
-
 \hbox{\hspace{.6\textwidth}\includegraphics[scale=1]{$title-logo$}}
 $endif$}
 $if(beamer)$
@@ -1115,8 +1110,11 @@ $body$
 $if(has-frontmatter)$
 \backmatter
 $endif$
-$if(natbib)$
+$if(nocite-ids)$
+\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+$endif$
 $if(bibliography)$
+$if(natbib)$
 $if(biblio-title)$
 $if(has-chapters)$
 \renewcommand\bibname{$biblio-title$}
