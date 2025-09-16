@@ -797,6 +797,15 @@ $endif$
 $for(biblatex-includes)$
 $biblatex-includes$
 $endfor$
+\DeclareLabeldate{%
+    \field{date}
+    \field{year}
+    \field{eventdate}
+    \field{origdate}
+    \field{urldate}
+    \field{pubstate}   % <-- NEW, https://tex.stackexchange.com/questions/337120/author-in-prep-instead-of-author-year
+    \literal{nodate}
+}
 $if(bibname-small-caps)$
 \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
 $endif$
