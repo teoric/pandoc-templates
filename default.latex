@@ -910,7 +910,9 @@ $else$
 $endif$
 $endif$
   pdfcreator={LaTeX via pandoc}}
-
+$if(pdfcomment)$
+\usepackage{pdfcomment}
+$endif$
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
