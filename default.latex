@@ -225,9 +225,13 @@ $if(mathspec)$
     \usepackage{mathspec} % this also loads fontspec
   \else
     \usepackage{unicode-math} % this also loads fontspec
+    \usepackage{lualatex-math}
   \fi
 $else$
   \usepackage{unicode-math} % this also loads fontspec
+  \ifXeTeX\else
+    \usepackage{lualatex-math}
+  \fi
 $endif$
   $if(font-scale-match-upper)$
   \defaultfontfeatures{Scale=MatchUppercase,Numbers=Monospaced}
