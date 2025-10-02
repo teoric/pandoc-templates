@@ -225,7 +225,7 @@ $if(mathspec)$
     \usepackage{mathspec} % this also loads fontspec
   \else
     \usepackage{unicode-math} % this also loads fontspec
-    \usepackage{lualatex-math}
+    \usepackage{  }
   \fi
 $else$
   \usepackage{unicode-math} % this also loads fontspec
