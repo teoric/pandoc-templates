@@ -26,7 +26,10 @@ $else$
 $endif$
 $if(papersize)$$papersize$paper,$else$$if(beamer)$%$else$a4paper,$endif$$endif$$if(landscape)$landscape,$endif$
 $if(beamer)$
+$if(allow-nonframetext)$
+$else$
   ignorenonframetext,
+$endif$
 $if(handout)$
   handout,
 $endif$
@@ -551,6 +554,8 @@ $if(graphics)$
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
+$if(beamer)$
+$else$
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
@@ -561,6 +566,7 @@ $if(graphics)$
       {\centering\oig[{#1}]{#2}\par}%
   }%
 }
+$endif$
 $if(non-floating)$
 \usepackage{float}
 \floatplacement{figure}{H}
