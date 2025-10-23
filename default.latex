@@ -218,6 +218,9 @@ $endif$
     \pdfminorversion=7
   \fi
 \fi
+$if(banking)$
+\usepackage{epcqrcode}
+$endif$
 \ifPDFTeX
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
