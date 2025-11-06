@@ -823,6 +823,10 @@ $if(bibname-small-caps)$
 \renewcommand*{\mkbibnamefamily}[1]{\textsc{#1}}
 $endif$
 $if(suppress-biblio-title)$\defbibheading{bibliography}{}$endif$
+$if(keep-language)$
+$else$
+\AtEveryBibitem{\clearfield{language}}
+$endif$
 $if(keep-pagetotal)$
 $else$
 \AtEveryBibitem{\clearfield{pagetotal}}
@@ -874,6 +878,11 @@ $-- csquotes
 $--
 $if(csquotes)$
 \usepackage[$if(csquotesoptions)$$for(csquotesoptions)$$csquotesoptions$$sep$,$endfor$$else$autostyle=true$endif$]{csquotes}
+$-- force csquotes if biblatex
+$else$
+$if(biblatex)$
+\usepackage[$if(csquotesoptions)$$for(csquotesoptions)$$csquotesoptions$$sep$,$endfor$$else$autostyle=true$endif$]{csquotes}
+$endif$
 $endif$
 $if(titlehead)$
 \titlehead{$titlehead$}
@@ -1159,12 +1168,18 @@ $endif$
 $endif$
 $if(biblatex)$
 $if(beamer)$
+$if(suppress-bibliography)$
+$else$
 \begin{frame}[allowframebreaks]{$biblio-title$}
   \bibliographytrue
   \printbibliography[heading=none]
 \end{frame}
+$endif$
+$else$
+$if(suppress-bibliography)$
 $else$
 \printbibliography$if(biblio-title)$[$if(suppress-biblio-title)$heading=none$else$title=$biblio-title$$endif$]$endif$
+$endif$
 $endif$
 $endif$
 $for(include-after)$
