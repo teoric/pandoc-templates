@@ -1079,6 +1079,7 @@ $endif$
 \ifcsname theHtable\endcsname\else
 \newcommand{\theHtable}{\thetable}
 \fi
+\newcounter{none}
 
 \begin{document}\sloppy
 
