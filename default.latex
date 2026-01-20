@@ -1125,6 +1125,10 @@ $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
 }
+$if(toc-on-same-page)$
+$else$
+\newpage{}
+$endif$
 $endif$
 $endif$
 $if(lof)$
