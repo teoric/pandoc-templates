@@ -559,6 +559,17 @@ $if(graphics)$
 \makeatother
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $if(beamer)$
+$if(center-images)$
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\AtBeginDocument{%
+  \let\oig\includegraphics%
+  \renewcommand\includegraphics[2][]{%
+      {\centering\oig[{#1}]{#2}\par}%
+  }%
+}
+$endif$
 $else$
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
