@@ -1017,9 +1017,11 @@ $endif$
 \newcommand{\unifont}{\empty}
 \else
 \newfontfamily\unifont[Contextuals=Alternate]{$if(unifont)$$unifont$$else$Junicode VF$endif$}
+\newfontfamily\frakfont[Contextuals=Alternate]{$if(frakfont)$$frakfont$$else$UnifrakturMaguntia16$endif$}
 \newfontfamily{\ligfont}[Ligatures={Required, Common, Contextual, Rare, Historic}]{$if(ligfont)$$ligfont$$else$$if(unifont)$$unifont$$else$Junicode VF$endif$$endif$}
 \fi
 \newcommand{\unitext}[1]{{\unifont{#1}}}
+\newcommand{\fraktext}[1]{{\frakfont{#1}}}
 $if(beamer)$
 \newrobustcmd*{\unemph}[1]{\textcolor{blue}{#1}}
 \newcommand{\ligtext}[1]{{\ligfont{#1}}}
