@@ -714,16 +714,16 @@ $if(csl-refs)$
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
 $--
+$--
 $-- Babel language support
 $--
 $if(lang)$
 \ifLuaTeX
-\usepackage[bidi=basic,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
+\usepackage[bidi=basic$if(shorthands)$$else$,shorthands=off$endif$$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \else
-\usepackage[bidi=default,shorthands=off,$for(babeloptions)$,$babeloptions$$endfor$]{babel}
+\usepackage[bidi=default$if(shorthands)$$else$,shorthands=off$endif$$for(babeloptions)$,$babeloptions$$endfor$]{babel}
 \fi
 $if(babel-lang)$
-\babelprovide[main,import]{$babel-lang$}
 $if(mainfont)$
 \ifPDFTeX
 \else
@@ -751,6 +751,15 @@ $endfor$
 %% \def\languageshorthands#1{}
 $endif$
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+% multiple footnotes:
+% https://tex.stackexchange.com/questions/40072/incompatibility-between-footmisc-option-multiple-and-hyperref
+\let\oldFootnote\footnote
+\newcommand\nextToken\relax
+\renewcommand\footnote[1]{%
+    \oldFootnote{#1}\futurelet\nextToken\isFootnote}
+\newcommand\isFootnote{%
+    \ifx\footnote\nextToken\textsuperscript{,}\fi}
+%% END multiple footnotes
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -928,7 +937,7 @@ $if(subject)$
   pdfsubject={$subject$},
 $endif$
 $if(keywords)$
-  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+  pdfkeywords={$for(keywords)$\xmpquote{$keywords$}$sep$, $endfor$},
 $endif$
 $if(colorlinks)$
   colorlinks=true,
@@ -1010,7 +1019,7 @@ $endif$
 $endif$
 $endif$
 $if(logo)$
-\logo{\includegraphics{$logo$}}
+\logo{\includegraphics$if(logooptions)$[$for(logooptions)$$logooptions$$sep$, $endfor$]$endif${$logo$}}
 $endif$
 $endif$
 \ifPDFTeX
