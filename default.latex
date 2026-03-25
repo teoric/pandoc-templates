@@ -1,14 +1,6 @@
-$document-metadata.latex()$
 \RequirePackage{fixltx2e}
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
-$if(dir)$
-$if(latex-dir-rtl)$
-\PassOptionsToPackage{RTLdocument}{bidi}
-$endif$
-$endif$
+$document-metadata.latex()$
+$passoptions.latex()$
 $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
@@ -1021,7 +1013,7 @@ $endif$
 $endif$
 $if(logo)$
 \logo{\includegraphics$if(logooptions)$[$for(logooptions)$$logooptions$$sep$, $endfor$]$endif${$logo$}}
-$endif$
+  $endif$
 $endif$
 \ifPDFTeX
 \newcommand{\unifont}{\empty}
