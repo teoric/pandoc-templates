@@ -10,6 +10,9 @@ $endif$
 $if(lang)$
   pdflang={$lang$},
 $endif$
+$if(pdfauthor)$
+  pdfauthor={$pdfauthor$},
+$endif$
 $if(subject)$
   pdfsubject={$subject$},
 $endif$
