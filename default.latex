@@ -785,7 +785,7 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$$else$style=$if(beamer)$ext-authortitle-comp,autocite=inline$else$ext-authoryear$endif$$endif$,$if(biblatexoptions-extra)$,$endif$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
+\usepackage[$if(cite-style)$citestyle=$cite-style$$endif$,$if(biblio-style)$$if(cite-style)$bib$endif$style=$biblio-style$$else$style=$if(beamer)$ext-authortitle-comp,autocite=inline$else$ext-authoryear$endif$$endif$,$if(biblatexoptions-extra)$$for(biblatexoptions-extra)$$biblatexoptions-extra$$sep$,$endfor$,$endif$$if(biblatexoptions)$,$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$$else$backend=biber,isbn=false,clearlang=true,maxbibnames=9,maxcitenames=4,mincrossrefs=2,sorting=nyvt$endif$]{biblatex}
 \DeclareRedundantLanguages{english,german,ngerman,french,dutch,afrikaans}{english,german,ngerman,french,dutch,afrikaans}
 \AtEveryBibitem{%
   \clearlist{language}%
@@ -839,10 +839,14 @@ $if(suppress-biblio-title)$\defbibheading{bibliography}{}$endif$
 $if(keep-language)$
 $else$
 \AtEveryBibitem{\clearfield{language}}
+\AtEveryCitekey{\clearfield{language}}
+\AtEveryBibitem{\clearlist{language}}
+\AtEveryCitekey{\clearlist{language}}
 $endif$
 $if(keep-pagetotal)$
 $else$
 \AtEveryBibitem{\clearfield{pagetotal}}
+\AtEveryCitekey{\clearfield{pagetotal}}
 $endif$
 $if(keep-bib-month)$
 $else$
