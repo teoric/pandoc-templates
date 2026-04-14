@@ -217,6 +217,9 @@ $endif$
 $if(banking)$
 \usepackage{epcqrcode}
 $endif$
+$-- $if(qrcode)$
+\usepackage{qrcode}
+$-- $endif$
 \ifPDFTeX
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
