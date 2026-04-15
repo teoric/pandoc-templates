@@ -218,7 +218,8 @@ $if(banking)$
 \usepackage{epcqrcode}
 $endif$
 $-- $if(qrcode)$
-\usepackage{qrcode}
+\usepackage{qrcode} % QR code
+\usepackage{hvqrurl} % QR code in margin
 $-- $endif$
 \ifPDFTeX
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
