@@ -1,4 +1,12 @@
 \RequirePackage{fixltx2e}
+$if(use-newpax)$
+$if(beamer)$
+\RequirePackage{pdfmanagement}
+\SetKeys[document/metadata]{pdfstandard=a-3b}
+$else$
+\DocumentMetadata{uncompress}
+$endif$
+$endif$
 $document-metadata.latex()$
 $passoptions.latex()$
 $if(CJKmainfont)$
@@ -760,6 +768,12 @@ $endif$
 \newcommand\isFootnote{%
     \ifx\footnote\nextToken\textsuperscript{,}\fi}
 %% END multiple footnotes
+$if(use-newpax)$
+  \usepackage{newpax}
+  \newpaxsetup{usefileattributes=true}
+  \directlua{require("newpax")}
+  \usepackage{pdfpages}
+$endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
