@@ -456,6 +456,14 @@ $if(beamer)$
 $endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifPDFTeX
+  % \IfFileExists{mlmodern.sty}{\usepackage{mlmodern}}{}
+  $if(pdflatex-font)$
+  \IfFileExists{$pdflatex-font$}{\usepackage{$pdflatex-font$}}{}
+  $else
+  \IfFileExists{kpfonts.sty}{\usepackage{kpfonts}}{}
+  $endif$
+\fi
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[$if(microtypeoptions)$$else$babel$endif$$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
 $--  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts %  (and, unfortunately, custom families)
