@@ -461,7 +461,10 @@ $endif$
   $if(pdflatex-font)$
   \IfFileExists{$pdflatex-font$}{\usepackage{$pdflatex-font$}}{}
   $else
-  \IfFileExists{kpfonts.sty}{\usepackage{kpfonts}}{}
+  \IfFileExists{kpfonts.sty}{\usepackage{kpfonts}}{
+    \IfFileExists{fontsetup.sty}{\usepackage[default]{fontsetup}}{
+      \IfFileExists{mlmfonts.sty}{\usepackae{mlmfonts}}{
+  }}}
   $endif$
 \fi
 \IfFileExists{microtype.sty}{% use microtype if available
