@@ -458,14 +458,14 @@ $endif$
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \ifPDFTeX
   % \IfFileExists{mlmodern.sty}{\usepackage{mlmodern}}{}
-  $if(pdflatex-font)$
+$if(pdflatex-font)$
   \IfFileExists{$pdflatex-font$}{\usepackage{$pdflatex-font$}}{}
-  $else
-  \IfFileExists{kpfonts.sty}{\usepackage{kpfonts}}{
-    \IfFileExists{fontsetup.sty}{\usepackage[default]{fontsetup}}{
-      \IfFileExists{mlmfonts.sty}{\usepackae{mlmfonts}}{
-  }}}
-  $endif$
+$else$
+  \IfFileExists{kpfonts.sty}{\usepackage{kpfonts}}{%
+    \IfFileExists{fontsetup.sty}{\usepackage[default]{fontsetup}}{%
+      \IfFileExists{mlmfonts.sty}{\usepackae{mlmfonts}}{%
+  }}}%
+$endif$
 \fi
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[$if(microtypeoptions)$$else$babel$endif$$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
@@ -1164,8 +1164,9 @@ $body$
 $if(has-frontmatter)$
 \backmatter
 $endif$
+$-- \nocite here not working in beamer, hence duplicated below in {frame}s
 $if(nocite-ids)$
-\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+\nocite{$for(nocite-ids)$$it$$sep$,$endfor$}
 $endif$
 $if(bibliography)$
 $if(natbib)$
@@ -1180,6 +1181,9 @@ $if(beamer)$
 \begin{frame}[allowframebreaks]{$biblio-title$}
   \bibliographytrue
 $endif$
+  $if(nocite-ids)$
+  \nocite{$for(nocite-ids)$$it$$sep$,$endfor$}
+  $endif$
   \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 $if(beamer)$
 \end{frame}
@@ -1193,6 +1197,9 @@ $if(suppress-bibliography)$
 $else$
 \begin{frame}[allowframebreaks]{$biblio-title$}
   \bibliographytrue
+  $if(nocite-ids)$
+  \nocite{$for(nocite-ids)$$it$$sep$,$endfor$}
+  $endif$
   \printbibliography[heading=none]
 \end{frame}
 $endif$
