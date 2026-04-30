@@ -1086,7 +1086,11 @@ $endif$
 \newunicodechar{Ȥ}{\iffontchar\font`Ȥ\relax{}Ȥ\else{}\iffontchar\font`Ʒ\relax{}Ʒ\else{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}Z̦\else{}Z\fi\fi\fi\fi}
 \newunicodechar{ʒ}{\iffontchar\font`ʒʒ\relax{}\else\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
+\newunicodechar{〈}{\iffontchar\font"2329\relax{}〈\else{}\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi\fi}
+\newunicodechar{〉}{\iffontchar\font"232A\relax{}〉\else{}\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi\fi}
+\newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
 \newunicodechar{⟨}{\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi}
+\newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
 \newunicodechar{🮰}{\iffontchar\font`🮰\relax{}\else{}{\symbolsfont{}🮰}{}\fi}
 \newunicodechar{⇓}{\iffontchar\font"21D1\relax{}\else{}$$\\Uparrow$${}\fi}
 \newunicodechar{⇓}{\iffontchar\font"21D3\relax{}\else{}$$\\Downarrow$${}\fi}
