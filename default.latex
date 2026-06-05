@@ -1088,7 +1088,6 @@ $endif$
 \newunicodechar{Ʒ}{\iffontchar\font`Ʒ\else{}Ʒ\relax{}\iffontchar\font"0339\relax{}z̹\else{}\iffontchar\font"0326\relax{}z̦\else{}z\fi\fi\fi}
 \newunicodechar{〈}{\iffontchar\font"2329\relax{}〈\else{}\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi\fi}
 \newunicodechar{〉}{\iffontchar\font"232A\relax{}〉\else{}\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi\fi}
-\newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
 \newunicodechar{⟨}{\iffontchar\font"27E8\relax{}⟨\else{}$$\langle$${}\fi}
 \newunicodechar{⟩}{\iffontchar\font"27E9\relax{}⟩\else{}$$\rangle$${}\fi}
 \newunicodechar{🮰}{\iffontchar\font`🮰\relax{}\else{}{\symbolsfont{}🮰}{}\fi}
