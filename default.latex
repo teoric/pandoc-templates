@@ -1100,7 +1100,7 @@ $endif$
 \fi
 \newcounter{none}
 
-\begin{document}\sloppy
+\begin{document}\sloppy\frenchspacing
 
 $if(has-frontmatter)$
 \frontmatter
