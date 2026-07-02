@@ -17,6 +17,7 @@ $if(subject)$
   pdfsubject={$subject$},
 $endif$
 $if(keywords)$
+  \usepackage{hyperxmp}
   pdfkeywords={$for(keywords)$\xmpquote{$keywords$}$sep$, $endfor$},
 $endif$
 $if(colorlinks)$
