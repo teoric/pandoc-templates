@@ -1,3 +1,6 @@
+$if(keywords)$
+  \usepackage{hyperxmp}
+$endif$
 \hypersetup{
   bookmarks=true,
   bookmarksopen=true,
@@ -17,7 +20,6 @@ $if(subject)$
   pdfsubject={$subject$},
 $endif$
 $if(keywords)$
-  \usepackage{hyperxmp}
   pdfkeywords={$for(keywords)$\xmpquote{$keywords$}$sep$, $endfor$},
 $endif$
 $if(colorlinks)$
