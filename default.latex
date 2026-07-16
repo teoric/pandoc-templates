@@ -765,6 +765,8 @@ $endfor$
 %% \def\languageshorthands#1{}
 $endif$
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+$if(beamer)$
+$else$
 % multiple footnotes:
 % https://tex.stackexchange.com/questions/40072/incompatibility-between-footmisc-option-multiple-and-hyperref
 \let\oldFootnote\footnote
@@ -774,6 +776,7 @@ $endif$
 \newcommand\isFootnote{%
     \ifx\footnote\nextToken\textsuperscript{,}\fi}
 %% END multiple footnotes
+$endif$
 $if(use-newpax)$
   \usepackage{newpax}
   \newpaxsetup{usefileattributes=true}
