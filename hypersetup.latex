@@ -1,9 +1,8 @@
-$if(keywords)$
-  \usepackage{hyperxmp}
-$endif$
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
-  bookmarks=true,
-  bookmarksopen=true,
 $if(title-meta)$
   pdftitle={$title-meta$},
 $endif$
@@ -12,9 +11,6 @@ $if(author-meta)$
 $endif$
 $if(lang)$
   pdflang={$lang$},
-$endif$
-$if(pdfauthor)$
-  pdfauthor={$pdfauthor$},
 $endif$
 $if(subject)$
   pdfsubject={$subject$},
