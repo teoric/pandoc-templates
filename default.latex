@@ -241,7 +241,7 @@ $else$
   \usepackage{unicode-math} % this also loads fontspec
   \ifXeTeX\else
     \usepackage{lualatex-math}
-  \IfFileExists{luamathaccents.sty}{\usepackage{luamathaccents}}{}
+  % \IfFileExists{luamathaccents.sty}{\usepackage{luamathaccents}}{}
   \fi
 $endif$
   $if(font-scale-match-upper)$
